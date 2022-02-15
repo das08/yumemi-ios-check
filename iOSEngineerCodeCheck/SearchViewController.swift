@@ -12,7 +12,7 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
     
     @IBOutlet weak var searchBar: UISearchBar!
     
-    var repo: [[String: Any]]=[]
+    var repositories: [[String: Any]]=[]
     
     var urlSessionTask: URLSessionTask?
     var searchWord: String!
@@ -41,9 +41,9 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
         if searchWord.count != 0 {
             apiEndpoint = "https://api.github.com/search/repositories?q=\(searchWord!)"
             urlSessionTask = URLSession.shared.dataTask(with: URL(string: apiEndpoint)!) { (data, res, err) in
-                if let obj = try! JSONSerialization.jsonObject(with: data!) as? [String: Any] {
-                    if let items = obj["items"] as? [[String: Any]] {
-                        self.repo = items
+                if let apiResponse = try! JSONSerialization.jsonObject(with: data!) as? [String: Any] {
+                    if let items = apiResponse["items"] as? [[String: Any]] {
+                        self.repositories = items
                         DispatchQueue.main.async {
                             self.tableView.reloadData()
                         }
@@ -57,20 +57,20 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "Detail"{
-            let dtl = segue.destination as! RepositoryDetailViewController
-            dtl.searchViewController = self
+            let repositoryDetailViewController = segue.destination as! RepositoryDetailViewController
+            repositoryDetailViewController.searchViewController = self
         }
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return repo.count
+        return repositories.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        let rp = repo[indexPath.row]
-        cell.textLabel?.text = rp["full_name"] as? String ?? ""
-        cell.detailTextLabel?.text = rp["language"] as? String ?? ""
+        let repository = repositories[indexPath.row]
+        cell.textLabel?.text = repository["full_name"] as? String ?? ""
+        cell.detailTextLabel?.text = repository["language"] as? String ?? ""
         cell.tag = indexPath.row
         return cell
     }
