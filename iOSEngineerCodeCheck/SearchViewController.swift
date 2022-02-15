@@ -15,8 +15,6 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
     var repositories: [[String: Any]]=[]
     
     var urlSessionTask: URLSessionTask?
-    var searchWord: String!
-    var apiEndpoint: String!
     var selectedRowIdx: Int!
     
     override func viewDidLoad() {
@@ -37,11 +35,11 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchWord = searchBar.text!
-        if searchWord.isEmpty { return }
+        guard let searchWord = searchBar.text, !searchWord.isEmpty else { return }
+        // TODO: Sanitize query params
+        guard let apiEndpoint = URL(string: "https://api.github.com/search/repositories?q=\(searchWord)") else { return }
         
-        apiEndpoint = "https://api.github.com/search/repositories?q=\(searchWord!)"
-        urlSessionTask = URLSession.shared.dataTask(with: URL(string: apiEndpoint)!) { (data, res, err) in
+        urlSessionTask = URLSession.shared.dataTask(with: apiEndpoint) { (data, res, err) in
             guard let data = data,
                   err == nil,
                   let apiResponse = (try? JSONSerialization.jsonObject(with: data)) as? [String: Any],
