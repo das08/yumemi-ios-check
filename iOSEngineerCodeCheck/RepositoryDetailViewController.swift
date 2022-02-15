@@ -37,15 +37,14 @@ class RepositoryDetailViewController: UIViewController {
     func getImage(){
         let repo = searchViewController.repositories[searchViewController.selectedRowIdx]
         repoNameLabel.text = repo["full_name"] as? String
-        if let repoOwner = repo["owner"] as? [String: Any] {
-            if let imgURL = repoOwner["avatar_url"] as? String {
-                URLSession.shared.dataTask(with: URL(string: imgURL)!) { (data, res, err) in
-                    let img = UIImage(data: data!)!
-                    DispatchQueue.main.async {
-                        self.repoImageView.image = img
-                    }
-                }.resume()
+        
+        guard let repoOwner = repo["owner"] as? [String: Any] else { return }
+        guard let repoOwnerImageURL = repoOwner["avatar_url"] as? String else { return }
+        URLSession.shared.dataTask(with: URL(string: repoOwnerImageURL)!) { (data, res, err) in
+            let img = UIImage(data: data!)!
+            DispatchQueue.main.async {
+                self.repoImageView.image = img
             }
-        }
+        }.resume()
     }
 }
