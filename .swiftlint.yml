@@ -46,3 +46,12 @@ trailing_whitespace:
 
 vertical_whitespace:
   max_empty_lines: 3
+
+type_name:
+  min_length: 4
+  max_length:
+    warning: 40
+    error: 50
+  excluded: 
+    - iOSEngineerCodeCheckUITests
+    - iOSEngineerCodeCheckTests
