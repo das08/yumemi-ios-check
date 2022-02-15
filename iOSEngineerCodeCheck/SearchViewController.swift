@@ -15,7 +15,7 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
     var repositories: [[String: Any]]=[]
     
     var urlSessionTask: URLSessionTask?
-    var selectedRowIdx: Int!
+    var selectedRowIdx: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,8 +56,8 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "Detail"{
-            let repositoryDetailViewController = segue.destination as! RepositoryDetailViewController
-            repositoryDetailViewController.searchViewController = self
+            let repositoryDetailViewController = segue.destination as? RepositoryDetailViewController
+            repositoryDetailViewController?.searchViewController = self
         }
     }
     

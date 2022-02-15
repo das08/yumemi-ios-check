@@ -21,24 +21,26 @@ class RepositoryDetailViewController: UIViewController {
     @IBOutlet weak var repoForksLabel: UILabel!
     @IBOutlet weak var repoIssuesLabel: UILabel!
     
-    var searchViewController: SearchViewController!
+    var searchViewController: SearchViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let repo = searchViewController.repositories[searchViewController.selectedRowIdx]
-        repoLanguageLabel.text = "Written in \(repo["language"] as? String ?? "")"
-        repoStarsLabel.text = "\(repo["stargazers_count"] as? Int ?? 0) stars"
-        repoWatchesLabel.text = "\(repo["wachers_count"] as? Int ?? 0) watchers"
-        repoForksLabel.text = "\(repo["forks_count"] as? Int ?? 0) forks"
-        repoIssuesLabel.text = "\(repo["open_issues_count"] as? Int ?? 0) open issues"
-        getImage()
+        guard
+            let selectedRowIdx = searchViewController?.selectedRowIdx,
+            let repository = searchViewController?.repositories[selectedRowIdx]
+        else { return }
+        repoLanguageLabel.text = "Written in \(repository["language"] as? String ?? "")"
+        repoStarsLabel.text = "\(repository["stargazers_count"] as? Int ?? 0) stars"
+        repoWatchesLabel.text = "\(repository["wachers_count"] as? Int ?? 0) watchers"
+        repoForksLabel.text = "\(repository["forks_count"] as? Int ?? 0) forks"
+        repoIssuesLabel.text = "\(repository["open_issues_count"] as? Int ?? 0) open issues"
+        getImage(repository: repository)
     }
     
-    func getImage(){
-        let repo = searchViewController.repositories[searchViewController.selectedRowIdx]
-        repoNameLabel.text = repo["full_name"] as? String
+    func getImage(repository: [String: Any]){
+        repoNameLabel.text = repository["full_name"] as? String
         
-        guard let repoOwner = repo["owner"] as? [String: Any] else { return }
+        guard let repoOwner = repository["owner"] as? [String: Any] else { return }
         guard
             let repoOwnerAvatar = repoOwner["avatar_url"] as? String,
             let repoOwnerImageURL = URL(string: repoOwnerAvatar)
