@@ -44,11 +44,11 @@ class RepositoryDetailViewController: UIViewController {
             let repoOwnerImageURL = URL(string: repoOwnerAvatar)
         else { return }
         
-        URLSession.shared.dataTask(with: repoOwnerImageURL) { (data, res, err) in
+        URLSession.shared.dataTask(with: repoOwnerImageURL) { [weak self] (data, res, err) in
             // TODO: Display placeholder image if the image does not exist
             guard let repoOwnerImage = data, let img = UIImage(data: repoOwnerImage) else { return }
             DispatchQueue.main.async {
-                self.repoImageView.image = img
+                self?.repoImageView.image = img
             }
         }.resume()
     }
