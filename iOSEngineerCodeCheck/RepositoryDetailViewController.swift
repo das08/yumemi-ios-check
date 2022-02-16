@@ -29,20 +29,20 @@ class RepositoryDetailViewController: UIViewController {
             let selectedRowIdx = searchViewController?.selectedRowIdx,
             let repository = searchViewController?.repositories[selectedRowIdx]
         else { return }
-        repoLanguageLabel.text = "Written in \(repository["language"] as? String ?? "")"
-        repoStarsLabel.text = "\(repository["stargazers_count"] as? Int ?? 0) stars"
-        repoWatchesLabel.text = "\(repository["wachers_count"] as? Int ?? 0) watchers"
-        repoForksLabel.text = "\(repository["forks_count"] as? Int ?? 0) forks"
-        repoIssuesLabel.text = "\(repository["open_issues_count"] as? Int ?? 0) open issues"
+        repoLanguageLabel.text = "Written in \(repository.language as? String ?? "")"
+        repoStarsLabel.text = "\(repository.starCount as? Int ?? 0) stars"
+        repoWatchesLabel.text = "\(repository.watchersCount as? Int ?? 0) watchers"
+        repoForksLabel.text = "\(repository.forksCount as? Int ?? 0) forks"
+        repoIssuesLabel.text = "\(repository.openIssuesCount as? Int ?? 0) open issues"
         getImage(repository: repository)
     }
     
-    func getImage(repository: [String: Any]){
-        repoNameLabel.text = repository["full_name"] as? String
+    func getImage(repository: Repository){
+        repoNameLabel.text = repository.fullName as? String
         
-        guard let repoOwner = repository["owner"] as? [String: Any] else { return }
+        guard let repoOwner = repository.owner as? RepositoryOwner else { return }
         guard
-            let repoOwnerAvatar = repoOwner["avatar_url"] as? String,
+            let repoOwnerAvatar = repoOwner.avatarURL as? String,
             let repoOwnerImageURL = URL(string: repoOwnerAvatar)
         else { return }
         
