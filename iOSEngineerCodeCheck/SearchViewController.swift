@@ -36,6 +36,7 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchWord = searchBar.text, !searchWord.isEmpty else { return }
+        // TODO: Separate functions
         // TODO: Sanitize query params
         guard let apiEndpoint = URL(string: "https://api.github.com/search/repositories?q=\(searchWord)") else { return }
         
