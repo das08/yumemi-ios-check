@@ -21,27 +21,32 @@ class RepositoryDetailViewController: UIViewController {
     @IBOutlet weak var repoForksLabel: UILabel!
     @IBOutlet weak var repoIssuesLabel: UILabel!
     
-    var searchViewController: SearchViewController!
+    var searchViewController: SearchViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let repo = searchViewController.repositories[searchViewController.selectedRowIdx]
-        repoLanguageLabel.text = "Written in \(repo["language"] as? String ?? "")"
-        repoStarsLabel.text = "\(repo["stargazers_count"] as? Int ?? 0) stars"
-        repoWatchesLabel.text = "\(repo["wachers_count"] as? Int ?? 0) watchers"
-        repoForksLabel.text = "\(repo["forks_count"] as? Int ?? 0) forks"
-        repoIssuesLabel.text = "\(repo["open_issues_count"] as? Int ?? 0) open issues"
-        getImage()
+        guard
+            let selectedRowIdx = searchViewController?.selectedRowIdx,
+            let repository = searchViewController?.repositories[selectedRowIdx]
+        else { return }
+        repoLanguageLabel.text = "Written in \(repository.language)"
+        repoStarsLabel.text = "\(repository.starCount) stars"
+        repoWatchesLabel.text = "\(repository.watchersCount) watchers"
+        repoForksLabel.text = "\(repository.forksCount) forks"
+        repoIssuesLabel.text = "\(repository.openIssuesCount) open issues"
+        repoNameLabel.text = repository.fullName
+        getImage(repository: repository)
     }
     
-    func getImage(){
-        let repo = searchViewController.repositories[searchViewController.selectedRowIdx]
-        repoNameLabel.text = repo["full_name"] as? String
+    func getImage(repository: Repository){
+        guard
+            let repoOwnerAvatar = repository.owner.avatarURL,
+            let repoOwnerImageURL = URL(string: repoOwnerAvatar)
+        else { return }
         
-        guard let repoOwner = repo["owner"] as? [String: Any] else { return }
-        guard let repoOwnerImageURL = repoOwner["avatar_url"] as? String else { return }
-        URLSession.shared.dataTask(with: URL(string: repoOwnerImageURL)!) { (data, res, err) in
-            let img = UIImage(data: data!)!
+        URLSession.shared.dataTask(with: repoOwnerImageURL) { (data, res, err) in
+            // TODO: Display placeholder image if the image does not exist
+            guard let repoOwnerImage = data, let img = UIImage(data: repoOwnerImage) else { return }
             DispatchQueue.main.async {
                 self.repoImageView.image = img
             }
