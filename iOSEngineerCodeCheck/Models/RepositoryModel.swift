@@ -6,6 +6,12 @@
 //  Copyright © 2022 YUMEMI Inc. All rights reserved.
 //
 
+struct RepositorySearchResult: Codable {
+    let items: [Repository]
+    enum CodingKeys: String, CodingKey {
+        case items
+    }
+}
 
 struct Repository: Codable {
     let id: Int
