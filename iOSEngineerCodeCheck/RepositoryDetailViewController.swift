@@ -29,20 +29,18 @@ class RepositoryDetailViewController: UIViewController {
             let selectedRowIdx = searchViewController?.selectedRowIdx,
             let repository = searchViewController?.repositories[selectedRowIdx]
         else { return }
-        repoLanguageLabel.text = "Written in \(repository.language as? String ?? "")"
-        repoStarsLabel.text = "\(repository.starCount as? Int ?? 0) stars"
-        repoWatchesLabel.text = "\(repository.watchersCount as? Int ?? 0) watchers"
-        repoForksLabel.text = "\(repository.forksCount as? Int ?? 0) forks"
-        repoIssuesLabel.text = "\(repository.openIssuesCount as? Int ?? 0) open issues"
+        repoLanguageLabel.text = "Written in \(repository.language)"
+        repoStarsLabel.text = "\(repository.starCount) stars"
+        repoWatchesLabel.text = "\(repository.watchersCount) watchers"
+        repoForksLabel.text = "\(repository.forksCount) forks"
+        repoIssuesLabel.text = "\(repository.openIssuesCount) open issues"
+        repoNameLabel.text = repository.fullName
         getImage(repository: repository)
     }
     
     func getImage(repository: Repository){
-        repoNameLabel.text = repository.fullName as? String
-        
-        guard let repoOwner = repository.owner as? RepositoryOwner else { return }
         guard
-            let repoOwnerAvatar = repoOwner.avatarURL as? String,
+            let repoOwnerAvatar = repository.owner.avatarURL,
             let repoOwnerImageURL = URL(string: repoOwnerAvatar)
         else { return }
         
