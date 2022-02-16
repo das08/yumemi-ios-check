@@ -29,7 +29,7 @@ class RepositoryDetailViewController: UIViewController {
             let selectedRowIdx = searchViewController?.selectedRowIdx,
             let repository = searchViewController?.repositories[selectedRowIdx]
         else { return }
-        repoLanguageLabel.text = "Written in \(repository.language)"
+        repoLanguageLabel.text = "Written in \(repository.getLanguage())"
         repoStarsLabel.text = "\(repository.starCount) stars"
         repoWatchesLabel.text = "\(repository.watchersCount) watchers"
         repoForksLabel.text = "\(repository.forksCount) forks"

@@ -54,7 +54,7 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
                             self?.tableView.reloadData()
                         }
                     case .failure(let error):
-                        print("error:\(error)")
+                        throw error
                     }
                 } catch {
                     if error as? APIError == APIError.network{
@@ -81,7 +81,7 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
         let cell = UITableViewCell()
         let repository = repositories[indexPath.row]
         cell.textLabel?.text = repository.fullName
-        cell.detailTextLabel?.text = repository.language
+        cell.detailTextLabel?.text = repository.getLanguage()
         cell.tag = indexPath.row
         return cell
     }
