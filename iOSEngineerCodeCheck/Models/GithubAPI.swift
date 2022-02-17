@@ -8,9 +8,11 @@
 
 import Foundation
 
-public enum APIError: Error {
+public enum APIError: Error, Equatable {
     case invalidJSON
+    case invalidSearchWord
     case network
+    case tooManyCall
     case unexpected(String)
 }
 
@@ -23,6 +25,10 @@ extension APIError: LocalizedError {
             return "サーバーと通信できません。"
         case .unexpected(let errorMsg):
             return errorMsg
+        case .invalidSearchWord:
+            return "検索する単語を変えてお試しください"
+        case .tooManyCall:
+            return "検索回数の上限に達しました。時間を開けて再度お試しください。"
         }
     }
 }

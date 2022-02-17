@@ -17,7 +17,7 @@ struct Repository: Codable {
     let id: Int
     let fullName: String
     let owner: RepositoryOwner
-    let language: String
+    let language: String?
     let starCount: Int
     let watchersCount: Int
     let forksCount: Int
@@ -31,6 +31,11 @@ struct Repository: Codable {
         case watchersCount = "watchers_count"
         case forksCount = "forks_count"
         case openIssuesCount = "open_issues_count"
+    }
+    
+    func getLanguage() -> String {
+        guard let lang = self.language else { return "---" }
+        return lang
     }
 }
 

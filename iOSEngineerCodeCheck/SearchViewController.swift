@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class SearchViewController: UITableViewController, UISearchBarDelegate {
     
@@ -38,21 +39,31 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
         guard let searchWord = searchBar.text, !searchWord.isEmpty else { return }
         // TODO: Separate functions
         // TODO: Sanitize query params
-        guard let apiEndpoint = URL(string: "https://api.github.com/search/repositories?q=\(searchWord)") else { return }
+        guard let apiEndpoint = URL(string: "https://api.github.com/search/repositories?q=\(searchWord)")
+        else { return }
         
-        urlSessionTask = URLSession.shared.dataTask(with: apiEndpoint) { (data, res, err) in
-            guard let data = data,
-                  err == nil,
-                  let searchResult = try? JSONDecoder().decode(RepositorySearchResult.self, from: data)
-            else { return }
-            
-            self.repositories = searchResult.items
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
+        AF.request(apiEndpoint, method: .get, parameters: nil, encoding: JSONEncoding.default)
+            .validate(statusCode: [200])
+            .responseData { [weak self] (response) in
+                do{
+                    switch response.result {
+                    case .success(let data):
+                        let searchResult = try JSONDecoder().decode(RepositorySearchResult.self, from: data)
+                        self?.repositories = searchResult.items
+                        DispatchQueue.main.async {
+                            self?.tableView.reloadData()
+                        }
+                    case .failure(let error):
+                        throw error
+                    }
+                } catch {
+                    if error as? APIError == APIError.network{
+                        print("network Error")
+                    } else {
+                        print(error)
+                    }
+                }
             }
-        }
-        // これ呼ばなきゃリストが更新されません
-        urlSessionTask?.resume()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -67,11 +78,12 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
+        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "Repository", for: indexPath)
         let repository = repositories[indexPath.row]
         cell.textLabel?.text = repository.fullName
-        cell.detailTextLabel?.text = repository.language
+        cell.detailTextLabel?.text = repository.getLanguage()
         cell.tag = indexPath.row
+        
         return cell
     }
     

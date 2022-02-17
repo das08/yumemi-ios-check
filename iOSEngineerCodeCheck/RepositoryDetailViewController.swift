@@ -29,7 +29,7 @@ class RepositoryDetailViewController: UIViewController {
             let selectedRowIdx = searchViewController?.selectedRowIdx,
             let repository = searchViewController?.repositories[selectedRowIdx]
         else { return }
-        repoLanguageLabel.text = "Written in \(repository.language)"
+        repoLanguageLabel.text = "Written in \(repository.getLanguage())"
         repoStarsLabel.text = "\(repository.starCount) stars"
         repoWatchesLabel.text = "\(repository.watchersCount) watchers"
         repoForksLabel.text = "\(repository.forksCount) forks"
@@ -44,11 +44,11 @@ class RepositoryDetailViewController: UIViewController {
             let repoOwnerImageURL = URL(string: repoOwnerAvatar)
         else { return }
         
-        URLSession.shared.dataTask(with: repoOwnerImageURL) { (data, res, err) in
+        URLSession.shared.dataTask(with: repoOwnerImageURL) { [weak self] (data, res, err) in
             // TODO: Display placeholder image if the image does not exist
             guard let repoOwnerImage = data, let img = UIImage(data: repoOwnerImage) else { return }
             DispatchQueue.main.async {
-                self.repoImageView.image = img
+                self?.repoImageView.image = img
             }
         }.resume()
     }
