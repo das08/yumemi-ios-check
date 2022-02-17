@@ -20,7 +20,6 @@ class SearchViewController2: UITableViewController {
         searchBar.text = "GitHubのリポジトリを検索できるよー"
         searchBar.delegate = self
         presenter = RepositorySearchPresenter.init(with: self)
-        presenter.viewDidLoad()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

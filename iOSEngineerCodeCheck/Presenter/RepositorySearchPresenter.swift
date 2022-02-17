@@ -9,7 +9,6 @@ import UIKit
 
 protocol RepositorySearchPresenterInput {
     var repositories: [Repository] { get }
-    func viewDidLoad()
     func didSelectRowAt(_ indexPath: IndexPath)
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar)
 }
@@ -30,10 +29,6 @@ class RepositorySearchPresenter: RepositorySearchPresenterInput {
     init(with view: RepositorySearchPresenterOutput) {
         self.repositorySearchView = view
         self.repositorySearchModel = GitHubAPIModel()
-    }
-    
-    func viewDidLoad() {
-        
     }
     
     private func getRepository(forRow row: Int) -> Repository? {
