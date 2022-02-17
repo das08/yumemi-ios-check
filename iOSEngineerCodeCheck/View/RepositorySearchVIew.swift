@@ -8,19 +8,19 @@
 
 import UIKit
 
-class SearchViewController2: UIViewController {
+class SearchViewController2: UITableViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
     
-    var repositories: [Repository]=[]
-    
-    var selectedRowIdx: Int?
+    private var presenter: RepositorySearchPresenter!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         searchBar.text = "GitHubのリポジトリを検索できるよー"
         searchBar.delegate = self
+        presenter = RepositorySearchPresenter.init(with: self)
+        presenter.viewDidLoad()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -29,30 +29,41 @@ class SearchViewController2: UIViewController {
             repositoryDetailViewController?.searchViewController2 = self
         }
     }
-}
 
-//extension SearchViewController2
-
-extension SearchViewController2: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return repositories.count
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return presenter.repositories.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "Repository", for: indexPath)
-        let repository = repositories[indexPath.row]
+        let repository = presenter.repositories[indexPath.row]
         cell.textLabel?.text = repository.fullName
         cell.detailTextLabel?.text = repository.getLanguage()
         cell.tag = indexPath.row
         
         return cell
     }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // 画面遷移時に呼ばれる
+        presenter.didSelectRowAt(indexPath)
+    }
 }
 
-extension SearchViewController2: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // 画面遷移時に呼ばれる
-        selectedRowIdx = indexPath.row
+extension SearchViewController2: RepositorySearchPresenterOutput {
+
+    func didFetch(_ repositories: [Repository]) {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+
+    func didFailToFetchRepository(with error: Error) {
+        print("error: didFailToFetchRepository")
+    }
+
+    func didFetchRepository(of repository: Repository) {
+        print("success: didFetchRepository")
         performSegue(withIdentifier: "Detail", sender: self)
     }
 }
@@ -62,5 +73,10 @@ extension SearchViewController2: UISearchBarDelegate {
         // ↓こうすれば初期のテキストを消せる
         searchBar.text = ""
         return true
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        presenter.searchBarSearchButtonClicked(searchBar)
+        
     }
 }
