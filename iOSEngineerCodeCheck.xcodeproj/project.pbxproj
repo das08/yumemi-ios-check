@@ -10,6 +10,8 @@
 		4F9D74A7F1C23A8FAE61A91C /* Pods_iOSEngineerCodeCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B4AE69F64B553440909B7F /* Pods_iOSEngineerCodeCheck.framework */; };
 		97EC46D927BBE46E006409D7 /* GithubAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EC46D827BBE46E006409D7 /* GithubAPI.swift */; };
 		97EC46DB27BBE5E5006409D7 /* RepositoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EC46DA27BBE5E5006409D7 /* RepositoryModel.swift */; };
+		97EC46E027BE6BCD006409D7 /* RepositorySearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EC46DF27BE6BCD006409D7 /* RepositorySearchModel.swift */; };
+		97EC46E227BE6DF8006409D7 /* RepositorySearchVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EC46E127BE6DF8006409D7 /* RepositorySearchVIew.swift */; };
 		99B8553EDD2D80E23B325752 /* Pods_iOSEngineerCodeCheckTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86CEB4664413EA69A8DDC8F7 /* Pods_iOSEngineerCodeCheckTests.framework */; };
 		AD590EED405A3824F8865240 /* Pods_iOSEngineerCodeCheck_iOSEngineerCodeCheckUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6211AD2C62CCFFC054ED7F0D /* Pods_iOSEngineerCodeCheck_iOSEngineerCodeCheckUITests.framework */; };
 		BF0A658D244F2A3B00280FA6 /* RepositoryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0A658C244F2A3B00280FA6 /* RepositoryDetailViewController.swift */; };
@@ -48,6 +50,8 @@
 		86CEB4664413EA69A8DDC8F7 /* Pods_iOSEngineerCodeCheckTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSEngineerCodeCheckTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		97EC46D827BBE46E006409D7 /* GithubAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubAPI.swift; sourceTree = "<group>"; };
 		97EC46DA27BBE5E5006409D7 /* RepositoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryModel.swift; sourceTree = "<group>"; };
+		97EC46DF27BE6BCD006409D7 /* RepositorySearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositorySearchModel.swift; sourceTree = "<group>"; };
+		97EC46E127BE6DF8006409D7 /* RepositorySearchVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositorySearchVIew.swift; sourceTree = "<group>"; };
 		A138C0789E0D437580536F4E /* Pods-iOSEngineerCodeCheck.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSEngineerCodeCheck.release.xcconfig"; path = "Target Support Files/Pods-iOSEngineerCodeCheck/Pods-iOSEngineerCodeCheck.release.xcconfig"; sourceTree = "<group>"; };
 		B3C0238066577E83535859D2 /* Pods-iOSEngineerCodeCheckTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSEngineerCodeCheckTests.debug.xcconfig"; path = "Target Support Files/Pods-iOSEngineerCodeCheckTests/Pods-iOSEngineerCodeCheckTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B9B4AE69F64B553440909B7F /* Pods_iOSEngineerCodeCheck.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSEngineerCodeCheck.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -129,6 +133,29 @@
 			path = GitHubAPI;
 			sourceTree = "<group>";
 		};
+		97EC46DC27BE6B75006409D7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				97EC46DF27BE6BCD006409D7 /* RepositorySearchModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		97EC46DD27BE6B7E006409D7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				97EC46E127BE6DF8006409D7 /* RepositorySearchVIew.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		97EC46DE27BE6B88006409D7 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
 		BFD945D2244DC5E80012785A = {
 			isa = PBXGroup;
 			children = (
@@ -154,6 +181,9 @@
 		BFD945DD244DC5E80012785A /* iOSEngineerCodeCheck */ = {
 			isa = PBXGroup;
 			children = (
+				97EC46DE27BE6B88006409D7 /* Presenter */,
+				97EC46DD27BE6B7E006409D7 /* View */,
+				97EC46DC27BE6B75006409D7 /* Model */,
 				97EC46D727BBE454006409D7 /* GitHubAPI */,
 				BFD945DE244DC5E80012785A /* AppDelegate.swift */,
 				BFD945E0244DC5E80012785A /* SceneDelegate.swift */,
@@ -446,8 +476,10 @@
 				BFD945E3244DC5E80012785A /* SearchViewController.swift in Sources */,
 				97EC46D927BBE46E006409D7 /* GithubAPI.swift in Sources */,
 				BF0A658D244F2A3B00280FA6 /* RepositoryDetailViewController.swift in Sources */,
+				97EC46E027BE6BCD006409D7 /* RepositorySearchModel.swift in Sources */,
 				97EC46DB27BBE5E5006409D7 /* RepositoryModel.swift in Sources */,
 				BFD945DF244DC5E80012785A /* AppDelegate.swift in Sources */,
+				97EC46E227BE6DF8006409D7 /* RepositorySearchVIew.swift in Sources */,
 				BFD945E1244DC5E80012785A /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
