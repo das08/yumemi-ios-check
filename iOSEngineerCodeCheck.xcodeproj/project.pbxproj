@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -117,17 +117,16 @@
 				B3C0238066577E83535859D2 /* Pods-iOSEngineerCodeCheckTests.debug.xcconfig */,
 				1F15470FDFC409E275DC42AE /* Pods-iOSEngineerCodeCheckTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		97EC46D727BBE454006409D7 /* Models */ = {
+		97EC46D727BBE454006409D7 /* GitHubAPI */ = {
 			isa = PBXGroup;
 			children = (
 				97EC46D827BBE46E006409D7 /* GithubAPI.swift */,
 				97EC46DA27BBE5E5006409D7 /* RepositoryModel.swift */,
 			);
-			path = Models;
+			path = GitHubAPI;
 			sourceTree = "<group>";
 		};
 		BFD945D2244DC5E80012785A = {
@@ -155,7 +154,7 @@
 		BFD945DD244DC5E80012785A /* iOSEngineerCodeCheck */ = {
 			isa = PBXGroup;
 			children = (
-				97EC46D727BBE454006409D7 /* Models */,
+				97EC46D727BBE454006409D7 /* GitHubAPI */,
 				BFD945DE244DC5E80012785A /* AppDelegate.swift */,
 				BFD945E0244DC5E80012785A /* SceneDelegate.swift */,
 				BFD945E2244DC5E80012785A /* SearchViewController.swift */,
