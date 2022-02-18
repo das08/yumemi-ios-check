@@ -9,8 +9,10 @@
 import UIKit
 
 class RepositoryDetailView: UIViewController, RepositoryDetailPresenterOutput {
-    func didFetch(_ image: UIImage) {
-        print(1)
+    func didFetch(_ imageData: Data) {
+        DispatchQueue.main.async {
+            self.repoImageView.image = UIImage(data: imageData)
+        }
     }
     
     func didFailToFetchImage(with error: Error) {

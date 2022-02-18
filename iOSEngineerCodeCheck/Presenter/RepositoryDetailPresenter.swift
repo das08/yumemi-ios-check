@@ -14,14 +14,13 @@ protocol RepositoryDetailPresenterInput {
 }
 
 protocol RepositoryDetailPresenterOutput: AnyObject {
-    func didFetch(_ image: UIImage)
+    func didFetch(_ imageData: Data)
     func didFailToFetchImage(with error: Error)
 }
 
 class RepositoryDetailPresenter: RepositoryDetailPresenterInput {
-
-    private(set) var imageData = Data(base64Encoded: "aa")
     var selectedRepository: Repository?
+    private var imageData: Data?
 
     private weak var repositoryDetailView: RepositoryDetailPresenterOutput?
     private var repositoryDetailModel: RepositoryDetailModelInput
@@ -32,21 +31,22 @@ class RepositoryDetailPresenter: RepositoryDetailPresenterInput {
     }
 
     func viewDidLoad() {
-        guard let repository = selectedRepository else { return }
-        repositoryDetailModel.getImage(repository: repository, completion: { [weak self] result in
-            switch result {
-            case .success(let image):
-//                self?.image = image
-                self?.repositoryDetailView?.didFetch(image)
-            case .failure(let error):
-                self?.repositoryDetailView?.didFailToFetchImage(with: error)
-            }
-        })
+        
     }
 }
 
 extension RepositoryDetailPresenter: RepositoryReceiver {
     func receive(_ repository: Repository) {
         selectedRepository = repository
+        guard let repository = selectedRepository else { return }
+        repositoryDetailModel.getImage(repository: repository, completion: { [weak self] result in
+            switch result {
+            case .success(let imageData):
+                self?.imageData = imageData
+                self?.repositoryDetailView?.didFetch(imageData)
+            case .failure(let error):
+                self?.repositoryDetailView?.didFailToFetchImage(with: error)
+            }
+        })
     }
 }
