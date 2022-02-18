@@ -8,24 +8,10 @@
 
 import UIKit
 
-class RepositoryDetailView: UIViewController, RepositoryDetailPresenterOutput {
-    func didFetch(_ imageData: Data) {
-        DispatchQueue.main.async {
-            self.repoImageView.image = UIImage(data: imageData)
-        }
-    }
-    
-    func didFailToFetchImage(with error: Error) {
-        print(2)
-    }
-    
-    
+class RepositoryDetailView: UIViewController {
     @IBOutlet weak var repoImageView: UIImageView!
-    
     @IBOutlet weak var repoNameLabel: UILabel!
-    
     @IBOutlet weak var repoLanguageLabel: UILabel!
-    
     @IBOutlet weak var repoStarsLabel: UILabel!
     @IBOutlet weak var repoWatchesLabel: UILabel!
     @IBOutlet weak var repoForksLabel: UILabel!
@@ -36,7 +22,6 @@ class RepositoryDetailView: UIViewController, RepositoryDetailPresenterOutput {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter = RepositoryDetailPresenter.init(with: self)
-        presenter.viewDidLoad()
     }
     
     private func setRepositoryDetail(repository: Repository) {
@@ -46,6 +31,18 @@ class RepositoryDetailView: UIViewController, RepositoryDetailPresenterOutput {
         repoForksLabel.text = "\(repository.forksCount) forks"
         repoIssuesLabel.text = "\(repository.openIssuesCount) open issues"
         repoNameLabel.text = repository.fullName
+    }
+}
+
+extension RepositoryDetailView: RepositoryDetailPresenterOutput {
+    func didFetch(_ imageData: Data) {
+        DispatchQueue.main.async {
+            self.repoImageView.image = UIImage(data: imageData)
+        }
+    }
+    
+    func didFailToFetchImage(with error: Error) {
+        print(2)
     }
 }
 

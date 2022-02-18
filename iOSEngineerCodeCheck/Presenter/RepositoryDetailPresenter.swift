@@ -9,7 +9,6 @@
 import UIKit
 
 protocol RepositoryDetailPresenterInput {
-    func viewDidLoad()
     func receive(_ repository: Repository)
 }
 
@@ -28,10 +27,6 @@ class RepositoryDetailPresenter: RepositoryDetailPresenterInput {
     init(with view: RepositoryDetailPresenterOutput) {
         self.repositoryDetailView = view
         self.repositoryDetailModel = RepositoryDetailModel()
-    }
-
-    func viewDidLoad() {
-        
     }
 }
 
