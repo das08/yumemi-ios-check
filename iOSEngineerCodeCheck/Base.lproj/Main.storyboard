@@ -62,10 +62,10 @@
             </objects>
             <point key="canvasLocation" x="-498" y="137"/>
         </scene>
-        <!--Repository Detail View Controller-->
+        <!--Repository Detail View-->
         <scene sceneID="JOC-74-7VT">
             <objects>
-                <viewController id="AHY-RL-7mG" customClass="RepositoryDetailViewController" customModule="iOSEngineerCodeCheck" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="AHY-RL-7mG" customClass="RepositoryDetailView" customModule="iOSEngineerCodeCheck" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4gp-25-lRZ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -142,7 +142,7 @@
                         <outlet property="repoImageView" destination="Iim-eb-8Ad" id="y4Q-Fc-fV0"/>
                         <outlet property="repoIssuesLabel" destination="dzg-K8-h2L" id="pTH-9P-1PH"/>
                         <outlet property="repoLanguageLabel" destination="s3M-QO-Kom" id="b7L-NE-fxh"/>
-                        <outlet property="repoNameLabel" destination="4q1-pG-WSB" id="6P4-NJ-zaP"/>
+                        <outlet property="repoNameLabel" destination="4q1-pG-WSB" id="eG0-Hv-X8c"/>
                         <outlet property="repoStarsLabel" destination="0WZ-UA-R8O" id="2Lz-OX-oXP"/>
                         <outlet property="repoWatchesLabel" destination="lQC-lo-IqN" id="Hns-K1-ljU"/>
                     </connections>

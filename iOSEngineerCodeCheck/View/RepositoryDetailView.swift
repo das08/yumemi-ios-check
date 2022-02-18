@@ -8,7 +8,15 @@
 
 import UIKit
 
-class RepositoryDetailView: UIViewController {
+class RepositoryDetailView: UIViewController, RepositoryDetailPresenterOutput {
+    func didFetch(_ image: UIImage) {
+        print(1)
+    }
+    
+    func didFailToFetchImage(with error: Error) {
+        print(2)
+    }
+    
     
     @IBOutlet weak var repoImageView: UIImageView!
     
@@ -21,22 +29,27 @@ class RepositoryDetailView: UIViewController {
     @IBOutlet weak var repoForksLabel: UILabel!
     @IBOutlet weak var repoIssuesLabel: UILabel!
     
-    var searchViewController: SearchViewController?
-    var repositorySearchView: RepositorySearchView?
+    private var presenter: RepositoryDetailPresenter!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard
-            let selectedRowIdx = searchViewController?.selectedRowIdx,
-            let repository = searchViewController?.repositories[selectedRowIdx]
-        else { return }
+        presenter = RepositoryDetailPresenter.init(with: self)
+        presenter.viewDidLoad()
+    }
+    
+    private func setRepositoryDetail(repository: Repository) {
         repoLanguageLabel.text = "Written in \(repository.getLanguage())"
         repoStarsLabel.text = "\(repository.starCount) stars"
         repoWatchesLabel.text = "\(repository.watchersCount) watchers"
         repoForksLabel.text = "\(repository.forksCount) forks"
         repoIssuesLabel.text = "\(repository.openIssuesCount) open issues"
         repoNameLabel.text = repository.fullName
-//        getImage(repository: repository)
     }
 }
 
+extension RepositoryDetailView: RepositoryReceiver {
+    func receive(_ repository: Repository) {
+        presenter.receive(repository)
+        setRepositoryDetail(repository: repository)
+    }
+}
