@@ -22,7 +22,7 @@ class RepositoryDetailViewController: UIViewController {
     @IBOutlet weak var repoIssuesLabel: UILabel!
     
     var searchViewController: SearchViewController?
-    var searchViewController2: SearchViewController2?
+    var repositorySearchView: RepositorySearchView?
     
     override func viewDidLoad() {
         super.viewDidLoad()

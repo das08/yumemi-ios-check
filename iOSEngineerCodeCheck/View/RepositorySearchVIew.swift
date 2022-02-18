@@ -1,5 +1,5 @@
 //
-//  RepositorySearchVIew.swift
+//  RepositorySearchView.swift
 //  iOSEngineerCodeCheck
 //
 //  Created by Kazuki Takeda on 2022/02/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchViewController2: UITableViewController {
+class RepositorySearchView: UITableViewController {
     
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -25,7 +25,7 @@ class SearchViewController2: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "Detail"{
             let repositoryDetailViewController = segue.destination as? RepositoryDetailViewController
-            repositoryDetailViewController?.searchViewController2 = self
+            repositoryDetailViewController?.repositorySearchView = self
         }
     }
 
@@ -49,7 +49,7 @@ class SearchViewController2: UITableViewController {
     }
 }
 
-extension SearchViewController2: RepositorySearchPresenterOutput {
+extension RepositorySearchView: RepositorySearchPresenterOutput {
 
     func didFetch(_ repositories: [Repository]) {
         DispatchQueue.main.async {
@@ -67,7 +67,7 @@ extension SearchViewController2: RepositorySearchPresenterOutput {
     }
 }
 
-extension SearchViewController2: UISearchBarDelegate {
+extension RepositorySearchView: UISearchBarDelegate {
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         // ↓こうすれば初期のテキストを消せる
         searchBar.text = ""
