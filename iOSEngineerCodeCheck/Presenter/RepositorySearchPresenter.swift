@@ -5,12 +5,12 @@
 //  Created by Kazuki Takeda on 2022/02/17.
 //  Copyright © 2022 YUMEMI Inc. All rights reserved.
 //
-import UIKit
+import Foundation
 
 protocol RepositorySearchPresenterInput {
     var repositories: [Repository] { get }
     func didSelectRowAt(_ indexPath: IndexPath)
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar)
+    func searchBarSearchButtonClicked(searchWord: String)
     func passRepository(to receiver: RepositoryReceiver)
 }
 
@@ -44,8 +44,7 @@ class RepositorySearchPresenter: RepositorySearchPresenterInput {
         repositorySearchView?.didFetchRepository(of: repository)
     }
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let searchWord = searchBar.text, !searchWord.isEmpty else { return }
+    func searchBarSearchButtonClicked(searchWord: String) {
         repositorySearchModel.fetchRepositories(searchWord: searchWord, completion: { [weak self] result in
             switch result {
             case .success(let repositories):

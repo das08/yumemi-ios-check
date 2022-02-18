@@ -78,7 +78,8 @@ extension RepositorySearchView: UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        presenter.searchBarSearchButtonClicked(searchBar)
+        guard let searchWord = searchBar.text, !searchWord.isEmpty else { return }
+        presenter.searchBarSearchButtonClicked(searchWord: searchWord)
         
     }
 }
