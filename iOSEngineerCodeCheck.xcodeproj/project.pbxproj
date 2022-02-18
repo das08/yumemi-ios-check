@@ -8,10 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		4F9D74A7F1C23A8FAE61A91C /* Pods_iOSEngineerCodeCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B4AE69F64B553440909B7F /* Pods_iOSEngineerCodeCheck.framework */; };
+		97EBC38727BF923800FEF062 /* RepositorySearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EBC38627BF923800FEF062 /* RepositorySearchView.swift */; };
+		97EBC38A27BFA13800FEF062 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EBC38927BFA13800FEF062 /* UIImageViewExtension.swift */; };
 		97EC46D927BBE46E006409D7 /* GithubAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EC46D827BBE46E006409D7 /* GithubAPI.swift */; };
 		97EC46DB27BBE5E5006409D7 /* RepositoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EC46DA27BBE5E5006409D7 /* RepositoryModel.swift */; };
 		97EC46E027BE6BCD006409D7 /* RepositorySearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EC46DF27BE6BCD006409D7 /* RepositorySearchModel.swift */; };
-		97EC46E227BE6DF8006409D7 /* RepositorySearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EC46E127BE6DF8006409D7 /* RepositorySearchView.swift */; };
 		97EC46E427BE70B5006409D7 /* RepositorySearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EC46E327BE70B5006409D7 /* RepositorySearchPresenter.swift */; };
 		97EC46E627BF4052006409D7 /* RepositoryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EC46E527BF4052006409D7 /* RepositoryDetailView.swift */; };
 		97EC46E827BF408E006409D7 /* RepositoryDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EC46E727BF408E006409D7 /* RepositoryDetailModel.swift */; };
@@ -51,10 +52,11 @@
 		58D5159A2E9E8E61331F1AB7 /* Pods-iOSEngineerCodeCheck-iOSEngineerCodeCheckUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSEngineerCodeCheck-iOSEngineerCodeCheckUITests.debug.xcconfig"; path = "Target Support Files/Pods-iOSEngineerCodeCheck-iOSEngineerCodeCheckUITests/Pods-iOSEngineerCodeCheck-iOSEngineerCodeCheckUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		6211AD2C62CCFFC054ED7F0D /* Pods_iOSEngineerCodeCheck_iOSEngineerCodeCheckUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSEngineerCodeCheck_iOSEngineerCodeCheckUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		86CEB4664413EA69A8DDC8F7 /* Pods_iOSEngineerCodeCheckTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSEngineerCodeCheckTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		97EBC38627BF923800FEF062 /* RepositorySearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositorySearchView.swift; sourceTree = "<group>"; };
+		97EBC38927BFA13800FEF062 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		97EC46D827BBE46E006409D7 /* GithubAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubAPI.swift; sourceTree = "<group>"; };
 		97EC46DA27BBE5E5006409D7 /* RepositoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryModel.swift; sourceTree = "<group>"; };
 		97EC46DF27BE6BCD006409D7 /* RepositorySearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositorySearchModel.swift; sourceTree = "<group>"; };
-		97EC46E127BE6DF8006409D7 /* RepositorySearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositorySearchView.swift; sourceTree = "<group>"; };
 		97EC46E327BE70B5006409D7 /* RepositorySearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositorySearchPresenter.swift; sourceTree = "<group>"; };
 		97EC46E527BF4052006409D7 /* RepositoryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryDetailView.swift; sourceTree = "<group>"; };
 		97EC46E727BF408E006409D7 /* RepositoryDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryDetailModel.swift; sourceTree = "<group>"; };
@@ -130,6 +132,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		97EBC38827BFA11400FEF062 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				97EBC38927BFA13800FEF062 /* UIImageViewExtension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		97EC46D727BBE454006409D7 /* GitHubAPI */ = {
 			isa = PBXGroup;
 			children = (
@@ -151,8 +161,8 @@
 		97EC46DD27BE6B7E006409D7 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				97EC46E127BE6DF8006409D7 /* RepositorySearchView.swift */,
 				97EC46E527BF4052006409D7 /* RepositoryDetailView.swift */,
+				97EBC38627BF923800FEF062 /* RepositorySearchView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -191,6 +201,7 @@
 		BFD945DD244DC5E80012785A /* iOSEngineerCodeCheck */ = {
 			isa = PBXGroup;
 			children = (
+				97EBC38827BFA11400FEF062 /* Extension */,
 				97EC46DE27BE6B88006409D7 /* Presenter */,
 				97EC46DD27BE6B7E006409D7 /* View */,
 				97EC46DC27BE6B75006409D7 /* Model */,
@@ -484,14 +495,15 @@
 			files = (
 				97EC46E427BE70B5006409D7 /* RepositorySearchPresenter.swift in Sources */,
 				97EC46EA27BF4223006409D7 /* RepositoryDetailPresenter.swift in Sources */,
+				97EBC38A27BFA13800FEF062 /* UIImageViewExtension.swift in Sources */,
 				97EC46D927BBE46E006409D7 /* GithubAPI.swift in Sources */,
+				97EBC38727BF923800FEF062 /* RepositorySearchView.swift in Sources */,
 				97EC46E027BE6BCD006409D7 /* RepositorySearchModel.swift in Sources */,
 				97EC46DB27BBE5E5006409D7 /* RepositoryModel.swift in Sources */,
 				97EC46EC27BF4B6B006409D7 /* Receiver.swift in Sources */,
 				97EC46E827BF408E006409D7 /* RepositoryDetailModel.swift in Sources */,
 				BFD945DF244DC5E80012785A /* AppDelegate.swift in Sources */,
 				97EC46E627BF4052006409D7 /* RepositoryDetailView.swift in Sources */,
-				97EC46E227BE6DF8006409D7 /* RepositorySearchView.swift in Sources */,
 				BFD945E1244DC5E80012785A /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

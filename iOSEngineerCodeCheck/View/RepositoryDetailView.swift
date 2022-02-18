@@ -16,12 +16,14 @@ class RepositoryDetailView: UIViewController {
     @IBOutlet weak var repoWatchesLabel: UILabel!
     @IBOutlet weak var repoForksLabel: UILabel!
     @IBOutlet weak var repoIssuesLabel: UILabel!
+    @IBOutlet weak var navigationBar: UINavigationItem!
     
     private var presenter: RepositoryDetailPresenter!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter = RepositoryDetailPresenter.init(with: self)
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
     private func setRepositoryDetail(repository: Repository) {
@@ -31,6 +33,7 @@ class RepositoryDetailView: UIViewController {
         repoForksLabel.text = "\(repository.forksCount) forks"
         repoIssuesLabel.text = "\(repository.openIssuesCount) open issues"
         repoNameLabel.text = repository.fullName
+        navigationBar.title = repository.fullName
     }
 }
 
@@ -38,6 +41,7 @@ extension RepositoryDetailView: RepositoryDetailPresenterOutput {
     func didFetch(_ image: Image) {
         DispatchQueue.main.async {
             self.repoImageView.image = image
+            self.repoImageView.makeRound()
         }
     }
     
