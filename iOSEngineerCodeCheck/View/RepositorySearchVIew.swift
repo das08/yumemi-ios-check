@@ -23,12 +23,12 @@ class RepositorySearchView: UITableViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "Detail"{
-            if let receiver = segue.destination as? RepositoryDetailView {
-                DispatchQueue.main.async{
-                    self.presenter.passRepository(to: receiver)
-                }
-            }
+        guard
+            let repositoryDetailViewController = segue.destination as? RepositoryDetailView,
+            segue.identifier == "Detail"
+        else { return }
+        DispatchQueue.main.async{
+            self.presenter.passRepository(to: repositoryDetailViewController)
         }
     }
 
@@ -53,7 +53,6 @@ class RepositorySearchView: UITableViewController {
 }
 
 extension RepositorySearchView: RepositorySearchPresenterOutput {
-
     func didFetch(_ repositories: [Repository]) {
         DispatchQueue.main.async {
             self.tableView.reloadData()
