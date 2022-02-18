@@ -24,8 +24,11 @@ class RepositorySearchView: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "Detail"{
-            let repositoryDetailViewController = segue.destination as? RepositoryDetailViewController
-            repositoryDetailViewController?.repositorySearchView = self
+            if let receiver = segue.destination as? RepositoryDetailView {
+                DispatchQueue.main.async{
+                    self.presenter.passRepository(to: receiver)
+                }
+            }
         }
     }
 

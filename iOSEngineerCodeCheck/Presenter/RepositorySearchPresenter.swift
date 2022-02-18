@@ -11,6 +11,7 @@ protocol RepositorySearchPresenterInput {
     var repositories: [Repository] { get }
     func didSelectRowAt(_ indexPath: IndexPath)
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar)
+    func passRepository(to receiver: RepositoryReceiver)
 }
 
 protocol RepositorySearchPresenterOutput: AnyObject {
@@ -20,6 +21,7 @@ protocol RepositorySearchPresenterOutput: AnyObject {
 }
 
 class RepositorySearchPresenter: RepositorySearchPresenterInput {
+    private var selectedIndex: Int?
     
     private(set) var repositories: [Repository] = [Repository]()
     
@@ -38,6 +40,7 @@ class RepositorySearchPresenter: RepositorySearchPresenterInput {
     
     func didSelectRowAt(_ indexPath: IndexPath) {
         guard let repository = getRepository(forRow: indexPath.row) else { return }
+        selectedIndex = indexPath.row
         repositorySearchView?.didFetchRepository(of: repository)
     }
     
@@ -52,5 +55,12 @@ class RepositorySearchPresenter: RepositorySearchPresenterInput {
                 self?.repositorySearchView?.didFailToFetchRepository(with: error)
             }
         })
+    }
+    
+    func passRepository(to receiver: RepositoryReceiver) {
+        guard let selectedIndex = selectedIndex else {
+            return
+        }
+        receiver.receive(repositories[selectedIndex])
     }
 }
