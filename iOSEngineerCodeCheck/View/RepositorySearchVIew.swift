@@ -40,7 +40,9 @@ class RepositorySearchView: UITableViewController {
         let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "Repository", for: indexPath)
         let repository = presenter.repositories[indexPath.row]
         cell.textLabel?.text = repository.fullName
-        cell.detailTextLabel?.text = repository.getLanguage()
+        let cellDetailLabel = NSMutableAttributedString(attachment: NSTextAttachment(image: UIImage(systemName: "star")!))
+        cellDetailLabel.append(NSAttributedString(string: String(repository.starCount)))
+        cell.detailTextLabel?.attributedText = cellDetailLabel
         cell.tag = indexPath.row
         
         return cell
