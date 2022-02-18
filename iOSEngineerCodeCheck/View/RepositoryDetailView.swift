@@ -6,7 +6,7 @@
 //  Copyright © 2022 YUMEMI Inc. All rights reserved.
 //
 
-import UIKit
+import AlamofireImage
 
 class RepositoryDetailView: UIViewController {
     @IBOutlet weak var repoImageView: UIImageView!
@@ -35,9 +35,9 @@ class RepositoryDetailView: UIViewController {
 }
 
 extension RepositoryDetailView: RepositoryDetailPresenterOutput {
-    func didFetch(_ imageData: Data) {
+    func didFetch(_ image: Image) {
         DispatchQueue.main.async {
-            self.repoImageView.image = UIImage(data: imageData)
+            self.repoImageView.image = image
         }
     }
     
