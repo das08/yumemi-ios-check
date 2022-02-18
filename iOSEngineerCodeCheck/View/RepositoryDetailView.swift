@@ -9,6 +9,10 @@
 import AlamofireImage
 
 class RepositoryDetailView: UIViewController {
+    @IBOutlet weak var starIconImage: UIImageView!
+    @IBOutlet weak var watcherIconImage: UIImageView!
+    @IBOutlet weak var forkIconImage: UIImageView!
+    @IBOutlet weak var issueIconImage: UIImageView!
     @IBOutlet weak var repoImageView: UIImageView!
     @IBOutlet weak var repoNameLabel: UILabel!
     @IBOutlet weak var repoLanguageLabel: UILabel!
@@ -24,6 +28,7 @@ class RepositoryDetailView: UIViewController {
         super.viewDidLoad()
         presenter = RepositoryDetailPresenter.init(with: self)
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        prepareLabels()
     }
     
     private func setRepositoryDetail(repository: Repository) {
@@ -34,6 +39,13 @@ class RepositoryDetailView: UIViewController {
         repoIssuesLabel.text = "\(repository.openIssuesCount) open issues"
         repoNameLabel.text = repository.fullName
         navigationBar.title = repository.fullName
+    }
+    
+    private func prepareLabels() {
+        starIconImage.image = Image(systemName: "star")
+        watcherIconImage.image = Image(systemName: "eye")
+        forkIconImage.image = Image(systemName: "arrow.triangle.branch")
+        issueIconImage.image = Image(systemName: "dot.circle")
     }
 }
 
