@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		4F9D74A7F1C23A8FAE61A91C /* Pods_iOSEngineerCodeCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9B4AE69F64B553440909B7F /* Pods_iOSEngineerCodeCheck.framework */; };
-		97EBC38727BF923800FEF062 /* RepositorySearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EBC38627BF923800FEF062 /* RepositorySearchView.swift */; };
 		97EBC38A27BFA13800FEF062 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EBC38927BFA13800FEF062 /* UIImageViewExtension.swift */; };
 		97EBC38C27BFB8D900FEF062 /* RepositorySearchMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EBC38B27BFB8D900FEF062 /* RepositorySearchMainView.swift */; };
 		97EBC38E27BFC0EF00FEF062 /* NavigationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EBC38D27BFC0EF00FEF062 /* NavigationExtension.swift */; };
@@ -54,7 +53,6 @@
 		58D5159A2E9E8E61331F1AB7 /* Pods-iOSEngineerCodeCheck-iOSEngineerCodeCheckUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iOSEngineerCodeCheck-iOSEngineerCodeCheckUITests.debug.xcconfig"; path = "Target Support Files/Pods-iOSEngineerCodeCheck-iOSEngineerCodeCheckUITests/Pods-iOSEngineerCodeCheck-iOSEngineerCodeCheckUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		6211AD2C62CCFFC054ED7F0D /* Pods_iOSEngineerCodeCheck_iOSEngineerCodeCheckUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSEngineerCodeCheck_iOSEngineerCodeCheckUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		86CEB4664413EA69A8DDC8F7 /* Pods_iOSEngineerCodeCheckTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iOSEngineerCodeCheckTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		97EBC38627BF923800FEF062 /* RepositorySearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositorySearchView.swift; sourceTree = "<group>"; };
 		97EBC38927BFA13800FEF062 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		97EBC38B27BFB8D900FEF062 /* RepositorySearchMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositorySearchMainView.swift; sourceTree = "<group>"; };
 		97EBC38D27BFC0EF00FEF062 /* NavigationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationExtension.swift; sourceTree = "<group>"; };
@@ -167,7 +165,6 @@
 			isa = PBXGroup;
 			children = (
 				97EC46E527BF4052006409D7 /* RepositoryDetailView.swift */,
-				97EBC38627BF923800FEF062 /* RepositorySearchView.swift */,
 				97EBC38B27BFB8D900FEF062 /* RepositorySearchMainView.swift */,
 			);
 			path = View;
@@ -504,7 +501,6 @@
 				97EBC38C27BFB8D900FEF062 /* RepositorySearchMainView.swift in Sources */,
 				97EBC38A27BFA13800FEF062 /* UIImageViewExtension.swift in Sources */,
 				97EC46D927BBE46E006409D7 /* GithubAPI.swift in Sources */,
-				97EBC38727BF923800FEF062 /* RepositorySearchView.swift in Sources */,
 				97EC46E027BE6BCD006409D7 /* RepositorySearchModel.swift in Sources */,
 				97EC46DB27BBE5E5006409D7 /* RepositoryModel.swift in Sources */,
 				97EC46EC27BF4B6B006409D7 /* Receiver.swift in Sources */,
