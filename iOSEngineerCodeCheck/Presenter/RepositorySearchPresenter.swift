@@ -15,6 +15,7 @@ protocol RepositorySearchPresenterInput {
 }
 
 protocol RepositorySearchPresenterOutput: AnyObject {
+    func didStartToFetch()
     func didFetch(_ repositories: [Repository])
     func didFailToFetchRepository(with error: Error)
     func didFetchRepository(of repository: Repository)
@@ -45,6 +46,7 @@ class RepositorySearchPresenter: RepositorySearchPresenterInput {
     }
     
     func searchBarSearchButtonClicked(searchWord: String) {
+        repositorySearchView?.didStartToFetch()
         repositorySearchModel.fetchRepositories(searchWord: searchWord, completion: { [weak self] result in
             switch result {
             case .success(let repositories):
