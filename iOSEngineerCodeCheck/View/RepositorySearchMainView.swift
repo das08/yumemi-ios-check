@@ -95,11 +95,17 @@ extension RepositorySearchMainView: RepositorySearchPresenterOutput {
         print("success: didFetchRepository")
         performSegue(withIdentifier: "Detail", sender: self)
     }
+    
+    func didBeginEditing() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
 }
 
 extension RepositorySearchMainView: UISearchBarDelegate {
-    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        return true
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        presenter.searchBarTextDidChange()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
