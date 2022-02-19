@@ -22,9 +22,14 @@ class RepositoryDetailView: UIViewController {
     @IBOutlet weak var repoForksLabel: UILabel!
     @IBOutlet weak var repoIssuesLabel: UILabel!
     @IBOutlet weak var navigationBar: UINavigationItem!
+    
     @IBAction func openRepositoryButton(_ sender: UIButton) {
         openRepository()
     }
+    @IBAction func shareRepositoryButton(_ sender: UIButton) {
+        shareRepository()
+    }
+    
     private var repositoryURL: String?
     private var presenter: RepositoryDetailPresenter!
     
@@ -42,6 +47,7 @@ extension RepositoryDetailView {
         watcherIconImage.image = Image(systemName: "eye")
         forkIconImage.image = Image(systemName: "arrow.triangle.branch")
         issueIconImage.image = Image(systemName: "dot.circle")
+        navigationBar.rightBarButtonItem = UIBarButtonItem(image: Image(systemName: "square.and.arrow.up"), style: .plain, target: self, action: #selector(shareRepositoryButton))
     }
     
     private func setRepositoryDetail(repository: Repository) {
@@ -67,6 +73,13 @@ extension RepositoryDetailView {
         guard let repoURL = repositoryURL, let url = URL(string: repoURL)
         else { return }
         UIApplication.shared.open(url)
+    }
+    
+    private func shareRepository() {
+        guard let repoURL = repositoryURL, let url = URL(string: repoURL)
+        else { return }
+        let activityViewController = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+        present(activityViewController, animated: true, completion: nil)
     }
 }
 

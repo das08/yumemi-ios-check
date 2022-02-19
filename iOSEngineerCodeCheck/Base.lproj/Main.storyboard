@@ -241,7 +241,19 @@
                             <constraint firstItem="Iim-eb-8Ad" firstAttribute="centerY" secondItem="srK-fe-i1b" secondAttribute="centerY" multiplier="0.7" constant="-32" id="ruB-l0-4VM"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="J6o-vL-S1z"/>
+                    <navigationItem key="navigationItem" id="J6o-vL-S1z">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="5iX-io-Y6k">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="b2G-S7-wZn">
+                                <rect key="frame" x="313" y="5" width="95" height="34.333333333333336"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Share"/>
+                                <connections>
+                                    <action selector="shareRepositoryButton:" destination="AHY-RL-7mG" eventType="touchUpInside" id="ogn-bC-YcJ"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="forkIconImage" destination="06u-TC-emG" id="xYk-2j-aNn"/>
                         <outlet property="issueIconImage" destination="bbk-mx-CI0" id="rxO-33-W5D"/>
