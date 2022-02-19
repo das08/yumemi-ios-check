@@ -11,6 +11,9 @@
 		97EBC38A27BFA13800FEF062 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EBC38927BFA13800FEF062 /* UIImageViewExtension.swift */; };
 		97EBC38C27BFB8D900FEF062 /* RepositorySearchMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EBC38B27BFB8D900FEF062 /* RepositorySearchMainView.swift */; };
 		97EBC38E27BFC0EF00FEF062 /* NavigationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EBC38D27BFC0EF00FEF062 /* NavigationExtension.swift */; };
+		97EBC39027BFD80B00FEF062 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EBC38F27BFD80B00FEF062 /* ColorExtension.swift */; };
+		97EBC39327BFD91800FEF062 /* colors.json in Resources */ = {isa = PBXBuildFile; fileRef = 97EBC39227BFD91800FEF062 /* colors.json */; };
+		97EBC39527BFD94500FEF062 /* LanguageColorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EBC39427BFD94500FEF062 /* LanguageColorModel.swift */; };
 		97EC46D927BBE46E006409D7 /* GithubAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EC46D827BBE46E006409D7 /* GithubAPI.swift */; };
 		97EC46DB27BBE5E5006409D7 /* RepositoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EC46DA27BBE5E5006409D7 /* RepositoryModel.swift */; };
 		97EC46E027BE6BCD006409D7 /* RepositorySearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97EC46DF27BE6BCD006409D7 /* RepositorySearchModel.swift */; };
@@ -56,6 +59,9 @@
 		97EBC38927BFA13800FEF062 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		97EBC38B27BFB8D900FEF062 /* RepositorySearchMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositorySearchMainView.swift; sourceTree = "<group>"; };
 		97EBC38D27BFC0EF00FEF062 /* NavigationExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationExtension.swift; sourceTree = "<group>"; };
+		97EBC38F27BFD80B00FEF062 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
+		97EBC39227BFD91800FEF062 /* colors.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = colors.json; sourceTree = "<group>"; };
+		97EBC39427BFD94500FEF062 /* LanguageColorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageColorModel.swift; sourceTree = "<group>"; };
 		97EC46D827BBE46E006409D7 /* GithubAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubAPI.swift; sourceTree = "<group>"; };
 		97EC46DA27BBE5E5006409D7 /* RepositoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryModel.swift; sourceTree = "<group>"; };
 		97EC46DF27BE6BCD006409D7 /* RepositorySearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositorySearchModel.swift; sourceTree = "<group>"; };
@@ -139,8 +145,17 @@
 			children = (
 				97EBC38927BFA13800FEF062 /* UIImageViewExtension.swift */,
 				97EBC38D27BFC0EF00FEF062 /* NavigationExtension.swift */,
+				97EBC38F27BFD80B00FEF062 /* ColorExtension.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		97EBC39127BFD8D500FEF062 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				97EBC39227BFD91800FEF062 /* colors.json */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		97EC46D727BBE454006409D7 /* GitHubAPI */ = {
@@ -148,6 +163,7 @@
 			children = (
 				97EC46D827BBE46E006409D7 /* GithubAPI.swift */,
 				97EC46DA27BBE5E5006409D7 /* RepositoryModel.swift */,
+				97EBC39427BFD94500FEF062 /* LanguageColorModel.swift */,
 			);
 			path = GitHubAPI;
 			sourceTree = "<group>";
@@ -204,6 +220,7 @@
 		BFD945DD244DC5E80012785A /* iOSEngineerCodeCheck */ = {
 			isa = PBXGroup;
 			children = (
+				97EBC39127BFD8D500FEF062 /* Resources */,
 				97EBC38827BFA11400FEF062 /* Extension */,
 				97EC46DE27BE6B88006409D7 /* Presenter */,
 				97EC46DD27BE6B7E006409D7 /* View */,
@@ -349,6 +366,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BFD945EB244DC5EB0012785A /* LaunchScreen.storyboard in Resources */,
+				97EBC39327BFD91800FEF062 /* colors.json in Resources */,
 				BFD945E8244DC5EB0012785A /* Assets.xcassets in Resources */,
 				BFD945E6244DC5E80012785A /* Main.storyboard in Resources */,
 			);
@@ -498,9 +516,11 @@
 			files = (
 				97EC46E427BE70B5006409D7 /* RepositorySearchPresenter.swift in Sources */,
 				97EC46EA27BF4223006409D7 /* RepositoryDetailPresenter.swift in Sources */,
+				97EBC39527BFD94500FEF062 /* LanguageColorModel.swift in Sources */,
 				97EBC38C27BFB8D900FEF062 /* RepositorySearchMainView.swift in Sources */,
 				97EBC38A27BFA13800FEF062 /* UIImageViewExtension.swift in Sources */,
 				97EC46D927BBE46E006409D7 /* GithubAPI.swift in Sources */,
+				97EBC39027BFD80B00FEF062 /* ColorExtension.swift in Sources */,
 				97EC46E027BE6BCD006409D7 /* RepositorySearchModel.swift in Sources */,
 				97EC46DB27BBE5E5006409D7 /* RepositoryModel.swift in Sources */,
 				97EC46EC27BF4B6B006409D7 /* Receiver.swift in Sources */,

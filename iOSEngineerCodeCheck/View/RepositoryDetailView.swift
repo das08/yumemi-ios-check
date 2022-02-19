@@ -32,7 +32,7 @@ class RepositoryDetailView: UIViewController {
     }
     
     private func setRepositoryDetail(repository: Repository) {
-        repoLanguageLabel.text = "Written in \(repository.getLanguage())"
+        repoLanguageLabel.text = repository.getLanguage()
         repoStarsLabel.text = String(repository.starCount)
         repoWatchesLabel.text = String(repository.watchersCount)
         repoForksLabel.text = String(repository.forksCount)
