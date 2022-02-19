@@ -17,12 +17,7 @@ class RepositorySearchMainView: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        searchBar.placeholder = "GitHubのリポジトリを検索できるよー"
-        searchBar.delegate = self
-        navigationBar.title = "Discover!"
-        navigationBar.backBarButtonItem?.title = nil
-        presenter = RepositorySearchPresenter.init(with: self)
+        prepareBars()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -41,19 +36,31 @@ class RepositorySearchMainView: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "Repository", for: indexPath)
+        return createCellText(cell: cell, indexPath: indexPath)
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presenter.didSelectRowAt(indexPath)
+    }
+}
+
+extension RepositorySearchMainView {
+    private func prepareBars() {
+        searchBar.placeholder = "GitHubのリポジトリを検索できるよー"
+        searchBar.delegate = self
+        navigationBar.title = "Discover!"
+        navigationBar.backBarButtonItem?.title = nil
+        presenter = RepositorySearchPresenter.init(with: self)
+    }
+    
+    private func createCellText(cell: UITableViewCell, indexPath: IndexPath) -> UITableViewCell{
         let repository = presenter.repositories[indexPath.row]
         cell.textLabel?.text = repository.fullName
         let cellDetailLabel = NSMutableAttributedString(attachment: NSTextAttachment(image: UIImage(systemName: "star")!))
         cellDetailLabel.append(NSAttributedString(string: String(repository.starCount)))
         cell.detailTextLabel?.attributedText = cellDetailLabel
         cell.tag = indexPath.row
-        
         return cell
-    }
-
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // 画面遷移時に呼ばれる
-        presenter.didSelectRowAt(indexPath)
     }
 }
 
