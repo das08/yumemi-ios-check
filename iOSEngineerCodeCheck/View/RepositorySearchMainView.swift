@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import NVActivityIndicatorView
 
 class RepositorySearchMainView: UITableViewController {
     
@@ -14,9 +15,11 @@ class RepositorySearchMainView: UITableViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     
     private var presenter: RepositorySearchPresenter!
+    private var activityIndicatorView: NVActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        prepareActivityIndicator()
         prepareBars()
     }
     
@@ -45,6 +48,12 @@ class RepositorySearchMainView: UITableViewController {
 }
 
 extension RepositorySearchMainView {
+    private func prepareActivityIndicator() {
+        activityIndicatorView = NVActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 100, height: 100), type: .ballSpinFadeLoader, color: .gray, padding: 0)
+        activityIndicatorView.center = self.view.center
+        view.addSubview(activityIndicatorView)
+    }
+    
     private func prepareBars() {
         searchBar.placeholder = "GitHubのリポジトリを検索できるよー"
         searchBar.delegate = self
@@ -65,9 +74,16 @@ extension RepositorySearchMainView {
 }
 
 extension RepositorySearchMainView: RepositorySearchPresenterOutput {
+    func didStartToFetch() {
+        DispatchQueue.main.async {
+            self.activityIndicatorView.startAnimating()
+        }
+    }
+    
     func didFetch(_ repositories: [Repository]) {
         DispatchQueue.main.async {
             self.tableView.reloadData()
+            self.activityIndicatorView.stopAnimating()
         }
     }
 
@@ -79,11 +95,17 @@ extension RepositorySearchMainView: RepositorySearchPresenterOutput {
         print("success: didFetchRepository")
         performSegue(withIdentifier: "Detail", sender: self)
     }
+    
+    func didBeginEditing() {
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
 }
 
 extension RepositorySearchMainView: UISearchBarDelegate {
-    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        return true
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        presenter.searchBarTextDidChange()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {

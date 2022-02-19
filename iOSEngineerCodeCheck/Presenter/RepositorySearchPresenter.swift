@@ -11,13 +11,16 @@ protocol RepositorySearchPresenterInput {
     var repositories: [Repository] { get }
     func didSelectRowAt(_ indexPath: IndexPath)
     func searchBarSearchButtonClicked(searchWord: String)
+    func searchBarTextDidChange()
     func passRepository(to receiver: RepositoryReceiver)
 }
 
 protocol RepositorySearchPresenterOutput: AnyObject {
+    func didStartToFetch()
     func didFetch(_ repositories: [Repository])
     func didFailToFetchRepository(with error: Error)
     func didFetchRepository(of repository: Repository)
+    func didBeginEditing()
 }
 
 class RepositorySearchPresenter: RepositorySearchPresenterInput {
@@ -45,6 +48,7 @@ class RepositorySearchPresenter: RepositorySearchPresenterInput {
     }
     
     func searchBarSearchButtonClicked(searchWord: String) {
+        repositorySearchView?.didStartToFetch()
         repositorySearchModel.fetchRepositories(searchWord: searchWord, completion: { [weak self] result in
             switch result {
             case .success(let repositories):
@@ -54,6 +58,11 @@ class RepositorySearchPresenter: RepositorySearchPresenterInput {
                 self?.repositorySearchView?.didFailToFetchRepository(with: error)
             }
         })
+    }
+    
+    func searchBarTextDidChange() {
+        self.repositories = []
+        self.repositorySearchView?.didBeginEditing()
     }
     
     func passRepository(to receiver: RepositoryReceiver) {

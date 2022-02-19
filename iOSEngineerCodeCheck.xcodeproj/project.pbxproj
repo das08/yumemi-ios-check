@@ -180,8 +180,8 @@
 		97EC46DD27BE6B7E006409D7 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				97EC46E527BF4052006409D7 /* RepositoryDetailView.swift */,
 				97EBC38B27BFB8D900FEF062 /* RepositorySearchMainView.swift */,
+				97EC46E527BF4052006409D7 /* RepositoryDetailView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
