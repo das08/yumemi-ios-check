@@ -211,17 +211,32 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lVd-Jp-FXe">
+                                <rect key="frame" x="40" y="726.66666666666663" width="348" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="zMt-fo-oeZ"/>
+                                </constraints>
+                                <color key="tintColor" systemColor="linkColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Browse Repository →"/>
+                                <connections>
+                                    <action selector="openRepository:" destination="AHY-RL-7mG" eventType="touchUpInside" id="WTT-bB-OI0"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="srK-fe-i1b"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="oOe-O2-3RS" firstAttribute="leading" secondItem="srK-fe-i1b" secondAttribute="leading" constant="25" id="272-gh-jKS"/>
                             <constraint firstItem="qmA-jB-MVo" firstAttribute="top" secondItem="4q1-pG-WSB" secondAttribute="bottom" constant="10" id="5e5-lq-Myv"/>
+                            <constraint firstItem="lVd-Jp-FXe" firstAttribute="leading" secondItem="srK-fe-i1b" secondAttribute="leading" constant="40" id="95E-kA-AD8"/>
                             <constraint firstItem="Iim-eb-8Ad" firstAttribute="leading" secondItem="srK-fe-i1b" secondAttribute="leading" constant="90" id="EMR-2C-CyU"/>
                             <constraint firstItem="4q1-pG-WSB" firstAttribute="top" secondItem="Iim-eb-8Ad" secondAttribute="bottom" constant="26" id="G2L-KM-330" userLabel="Repo Name Label.top = Repo Image View.bottom + 25"/>
                             <constraint firstItem="4q1-pG-WSB" firstAttribute="centerX" secondItem="Iim-eb-8Ad" secondAttribute="centerX" id="Ght-Nb-HEu"/>
                             <constraint firstItem="oOe-O2-3RS" firstAttribute="top" secondItem="qmA-jB-MVo" secondAttribute="bottom" constant="30" id="H7K-Yh-xyV"/>
                             <constraint firstItem="srK-fe-i1b" firstAttribute="trailing" secondItem="Iim-eb-8Ad" secondAttribute="trailing" constant="89" id="IgU-EN-fM3" userLabel="Safe Area.trailing = Repo Image View.trailing + 90"/>
+                            <constraint firstItem="lVd-Jp-FXe" firstAttribute="top" secondItem="oOe-O2-3RS" secondAttribute="bottom" constant="50" id="QJi-RJ-cEx"/>
+                            <constraint firstItem="srK-fe-i1b" firstAttribute="trailing" secondItem="lVd-Jp-FXe" secondAttribute="trailing" constant="40" id="c6T-01-WUG"/>
                             <constraint firstItem="qmA-jB-MVo" firstAttribute="centerX" secondItem="4gp-25-lRZ" secondAttribute="centerX" id="jU3-mm-0Ih"/>
                             <constraint firstItem="Iim-eb-8Ad" firstAttribute="centerY" secondItem="srK-fe-i1b" secondAttribute="centerY" multiplier="0.7" constant="-32" id="ruB-l0-4VM"/>
                         </constraints>
@@ -270,6 +285,9 @@
         </systemColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

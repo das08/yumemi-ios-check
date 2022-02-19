@@ -22,6 +22,15 @@ class RepositoryDetailView: UIViewController {
     @IBOutlet weak var repoForksLabel: UILabel!
     @IBOutlet weak var repoIssuesLabel: UILabel!
     @IBOutlet weak var navigationBar: UINavigationItem!
+    @IBAction func openRepository(_ sender: UIButton) {
+        guard
+            let repoURL = repositoryURL,
+            let url = URL(string: repoURL)
+        else { return }
+        UIApplication.shared.open(url)
+    }
+    
+    private var repositoryURL: String?
     
     private var presenter: RepositoryDetailPresenter!
     
@@ -39,6 +48,7 @@ class RepositoryDetailView: UIViewController {
         repoIssuesLabel.text = String(repository.openIssuesCount)
         repoNameLabel.text = repository.fullName
         navigationBar.title = repository.fullName
+        repositoryURL = repository.url
         prepareLanguageColor(repository: repository)
     }
     
