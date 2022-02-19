@@ -22,7 +22,7 @@ class GitHubAPIModel: GitHubAPIModelInput {
         
         AF.request(apiEndpoint, method: .get, parameters: nil, encoding: JSONEncoding.default)
             .validate(statusCode: [200])
-            .responseData { [weak self] (response) in
+            .responseData { (response) in
                 do{
                     switch response.result {
                     case .success(let data):
