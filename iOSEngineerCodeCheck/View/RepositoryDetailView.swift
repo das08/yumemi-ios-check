@@ -72,7 +72,7 @@ extension RepositoryDetailView {
     private func openRepository() {
         guard let repoURL = repositoryURL, let url = URL(string: repoURL)
         else { return }
-        UIApplication.shared.open(url)
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
     private func shareRepository() {
