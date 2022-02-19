@@ -22,23 +22,26 @@ class RepositoryDetailView: UIViewController {
     @IBOutlet weak var repoForksLabel: UILabel!
     @IBOutlet weak var repoIssuesLabel: UILabel!
     @IBOutlet weak var navigationBar: UINavigationItem!
-    @IBAction func openRepository(_ sender: UIButton) {
-        guard
-            let repoURL = repositoryURL,
-            let url = URL(string: repoURL)
-        else { return }
-        UIApplication.shared.open(url)
+    @IBAction func openRepositoryButton(_ sender: UIButton) {
+        openRepository()
     }
-    
     private var repositoryURL: String?
-    
     private var presenter: RepositoryDetailPresenter!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter = RepositoryDetailPresenter.init(with: self)
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         prepareLabels()
+    }
+}
+
+extension RepositoryDetailView {
+    private func prepareLabels() {
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        starIconImage.image = Image(systemName: "star")
+        watcherIconImage.image = Image(systemName: "eye")
+        forkIconImage.image = Image(systemName: "arrow.triangle.branch")
+        issueIconImage.image = Image(systemName: "dot.circle")
     }
     
     private func setRepositoryDetail(repository: Repository) {
@@ -52,19 +55,18 @@ class RepositoryDetailView: UIViewController {
         prepareLanguageColor(repository: repository)
     }
     
-    private func prepareLabels() {
-        starIconImage.image = Image(systemName: "star")
-        watcherIconImage.image = Image(systemName: "eye")
-        forkIconImage.image = Image(systemName: "arrow.triangle.branch")
-        issueIconImage.image = Image(systemName: "dot.circle")
-    }
-    
     private func prepareLanguageColor(repository: Repository) {
         let languageColor = LoadLanguageColor.shared.getColorOf(lang: repository.getLanguage())
         guard let colorHex = languageColor?.hex else { return }
         repoLanguageColor.image = Image(systemName: "circle.fill")
         repoLanguageColor.tintColor = UIColor(hex: colorHex)
         repoLanguageLabel.text = repository.getLanguage()
+    }
+    
+    private func openRepository() {
+        guard let repoURL = repositoryURL, let url = URL(string: repoURL)
+        else { return }
+        UIApplication.shared.open(url)
     }
 }
 
