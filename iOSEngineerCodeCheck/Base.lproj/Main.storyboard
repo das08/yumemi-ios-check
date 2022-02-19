@@ -83,17 +83,18 @@
                                 <color key="textColor" systemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="qmA-jB-MVo">
-                                <rect key="frame" x="139.33333333333337" y="501.66666666666669" width="149.66666666666663" height="20.333333333333314"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="qmA-jB-MVo">
+                                <rect key="frame" x="169.33333333333334" y="501.66666666666669" width="89.333333333333343" height="15.000000000000057"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Written in" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iGC-ny-agK">
-                                        <rect key="frame" x="0.0" y="0.0" width="73.333333333333329" height="20.333333333333332"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Language" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s3M-QO-Kom">
-                                        <rect key="frame" x="83.333333333333314" y="0.0" width="66.333333333333314" height="20.333333333333332"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fHJ-J6-v7l">
+                                        <rect key="frame" x="0.0" y="0.0" width="15" height="15"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="15" id="Qq1-nl-FEM"/>
+                                            <constraint firstAttribute="width" constant="15" id="oG5-0O-uoa"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s3M-QO-Kom">
+                                        <rect key="frame" x="23" y="0.0" width="66.333333333333329" height="15"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                         <color key="textColor" systemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
@@ -101,7 +102,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="oOe-O2-3RS" userLabel="Stack View2">
-                                <rect key="frame" x="25" y="552" width="135.66666666666666" height="128"/>
+                                <rect key="frame" x="25" y="546.66666666666663" width="135.66666666666666" height="128"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="0gb-01-GLC" userLabel="Repo Stats Stack View">
                                         <rect key="frame" x="0.0" y="0.0" width="135.66666666666666" height="128"/>
@@ -233,6 +234,7 @@
                         <outlet property="repoForksLabel" destination="ZMv-4f-X2V" id="HBi-Wu-apQ"/>
                         <outlet property="repoImageView" destination="Iim-eb-8Ad" id="y4Q-Fc-fV0"/>
                         <outlet property="repoIssuesLabel" destination="dzg-K8-h2L" id="pTH-9P-1PH"/>
+                        <outlet property="repoLanguageColor" destination="fHJ-J6-v7l" id="RX2-RH-AJA"/>
                         <outlet property="repoLanguageLabel" destination="s3M-QO-Kom" id="b7L-NE-fxh"/>
                         <outlet property="repoNameLabel" destination="4q1-pG-WSB" id="eG0-Hv-X8c"/>
                         <outlet property="repoStarsLabel" destination="0WZ-UA-R8O" id="2Lz-OX-oXP"/>

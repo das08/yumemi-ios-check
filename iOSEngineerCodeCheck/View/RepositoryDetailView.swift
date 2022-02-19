@@ -16,6 +16,7 @@ class RepositoryDetailView: UIViewController {
     @IBOutlet weak var repoImageView: UIImageView!
     @IBOutlet weak var repoNameLabel: UILabel!
     @IBOutlet weak var repoLanguageLabel: UILabel!
+    @IBOutlet weak var repoLanguageColor: UIImageView!
     @IBOutlet weak var repoStarsLabel: UILabel!
     @IBOutlet weak var repoWatchesLabel: UILabel!
     @IBOutlet weak var repoForksLabel: UILabel!
@@ -32,13 +33,13 @@ class RepositoryDetailView: UIViewController {
     }
     
     private func setRepositoryDetail(repository: Repository) {
-        repoLanguageLabel.text = repository.getLanguage()
         repoStarsLabel.text = String(repository.starCount)
         repoWatchesLabel.text = String(repository.watchersCount)
         repoForksLabel.text = String(repository.forksCount)
         repoIssuesLabel.text = String(repository.openIssuesCount)
         repoNameLabel.text = repository.fullName
         navigationBar.title = repository.fullName
+        prepareLanguageColor(repository: repository)
     }
     
     private func prepareLabels() {
@@ -46,6 +47,14 @@ class RepositoryDetailView: UIViewController {
         watcherIconImage.image = Image(systemName: "eye")
         forkIconImage.image = Image(systemName: "arrow.triangle.branch")
         issueIconImage.image = Image(systemName: "dot.circle")
+    }
+    
+    private func prepareLanguageColor(repository: Repository) {
+        let languageColor = LoadLanguageColor.shared.getColorOf(lang: repository.getLanguage())
+        guard let colorHex = languageColor?.hex else { return }
+        repoLanguageColor.image = Image(systemName: "circle.fill")
+        repoLanguageColor.tintColor = UIColor(hex: colorHex)
+        repoLanguageLabel.text = repository.getLanguage()
     }
 }
 
