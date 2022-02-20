@@ -13,6 +13,7 @@ public enum APIError: Error, Equatable {
     case invalidSearchWord
     case network
     case tooManyCall
+    case noMatchResult
     case unexpected(String)
 }
 
@@ -20,19 +21,23 @@ extension APIError: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .invalidJSON:
-            return "正しいJSONではありません"
+            return "正しいJSONではありません。"
+        
+        case .invalidSearchWord:
+            return "検索する単語を変えてお試しください。"
             
         case .network:
-            return "サーバーと通信できません。"
+            return "ネットワークエラーです。時間を開けて再度お試しください。"
+            
+        case .tooManyCall:
+            return "検索回数の上限に達しました。時間を開けて再度お試しください。"
+            
+        case .noMatchResult:
+            return "お探しのレポジトリは見つかりませんでした。\n検索ワードを変えて再度お試しください。"
             
         case .unexpected(let errorMsg):
             return errorMsg
             
-        case .invalidSearchWord:
-            return "検索する単語を変えてお試しください"
-            
-        case .tooManyCall:
-            return "検索回数の上限に達しました。時間を開けて再度お試しください。"
         }
     }
 }
