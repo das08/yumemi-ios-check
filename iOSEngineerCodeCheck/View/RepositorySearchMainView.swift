@@ -14,7 +14,9 @@ class RepositorySearchMainView: UITableViewController {
     @IBOutlet weak var navigationBar: UINavigationItem!
     @IBOutlet weak var searchBar: UISearchBar!
     
+    // swiftlint:disable:next implicitly_unwrapped_optional
     private var presenter: RepositorySearchPresenter!
+    // swiftlint:disable:next implicitly_unwrapped_optional
     private var activityIndicatorView: NVActivityIndicatorView!
     
     override func viewDidLoad() {
@@ -28,7 +30,7 @@ class RepositorySearchMainView: UITableViewController {
             let repositoryDetailViewController = segue.destination as? RepositoryDetailView,
             segue.identifier == "Detail"
         else { return }
-        DispatchQueue.main.async{
+        DispatchQueue.main.async {
             self.presenter.passRepository(to: repositoryDetailViewController)
         }
     }
@@ -62,7 +64,7 @@ extension RepositorySearchMainView {
         presenter = RepositorySearchPresenter.init(with: self, with: GitHubAPIModel())
     }
     
-    private func createCellText(cell: UITableViewCell, indexPath: IndexPath) -> UITableViewCell{
+    private func createCellText(cell: UITableViewCell, indexPath: IndexPath) -> UITableViewCell {
         let repository = presenter.repositories[indexPath.row]
         cell.textLabel?.text = repository.fullName
         let cellDetailLabel = NSMutableAttributedString(attachment: NSTextAttachment(image: UIImage(systemName: "star")!))

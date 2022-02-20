@@ -54,6 +54,7 @@ class RepositorySearchPresenter: RepositorySearchPresenterInput {
             case .success(let repositories):
                 self?.repositories = repositories
                 self?.repositorySearchView?.didFetch(repositories)
+                
             case .failure(let error):
                 self?.repositorySearchView?.didFailToFetchRepository(with: error)
             }

@@ -63,8 +63,11 @@ class GitHubAPIModelInputStub: GitHubAPIModelInput {
 }
 
 class RepositorySearchTests: XCTestCase {
+    // swiftlint:disable:next implicitly_unwrapped_optional
     private var spy: RepositorySearchPresenterOutputSpy!
+    // swiftlint:disable:next implicitly_unwrapped_optional
     private var stub: GitHubAPIModelInputStub!
+    // swiftlint:disable:next implicitly_unwrapped_optional
     private var presenter: RepositorySearchPresenter!
     private var mockRepository1 = Repository(id: 1, url: "https://github.com", fullName: "iOSTest", owner: RepositoryOwner(id: 1, avatarURL: "https://via.placeholder.com/150"), language: "Swift", starCount: 10, watchersCount: 10, forksCount: 20, openIssuesCount: 30)
     private var mockRepository2 = Repository(id: 2, url: "https://github.com", fullName: "AppleDev", owner: RepositoryOwner(id: 2, avatarURL: "https://via.placeholder.com/150"), language: "Java", starCount: 12, watchersCount: 12, forksCount: 22, openIssuesCount: 32)

@@ -31,6 +31,7 @@ class RepositoryDetailView: UIViewController {
     }
     
     private var repositoryURL: String?
+    // swiftlint:disable:next implicitly_unwrapped_optional
     private var presenter: RepositoryDetailPresenter!
     
     override func viewDidLoad() {

@@ -33,7 +33,7 @@ class GitHubAPIModel: GitHubAPIModelInput {
                         throw error
                     }
                 } catch {
-                    if error as? APIError == APIError.network{
+                    if error as? APIError == APIError.network {
                         print("network Error")
                     } else {
                         print(error)
