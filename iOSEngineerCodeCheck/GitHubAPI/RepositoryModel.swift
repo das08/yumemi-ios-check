@@ -54,4 +54,3 @@ struct RepositoryOwner: Codable {
         case avatarURL = "avatar_url"
     }
 }
-

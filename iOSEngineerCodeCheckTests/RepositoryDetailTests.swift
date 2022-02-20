@@ -26,7 +26,7 @@ class RepositoryDetailModelInputStub: RepositoryDetailModelInput {
     private var mockImage: Image!
     private var mockError: Error?
     
-    func getImage(repository: Repository, completion: @escaping ((Result<Image, Error>) -> ())) {
+    func getImage(repository: Repository, completion: @escaping ((Result<Image, Error>) -> Void)) {
         guard
             let error = mockError
         else {
@@ -40,6 +40,7 @@ class RepositoryDetailModelInputStub: RepositoryDetailModelInput {
         switch response {
         case let .success(image):
             mockImage = image
+        
         case let .failure(error):
             mockError = error
         }

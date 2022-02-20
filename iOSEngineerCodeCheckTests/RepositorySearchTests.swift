@@ -41,7 +41,7 @@ class GitHubAPIModelInputStub: GitHubAPIModelInput {
     private var mockRepositories: [Repository] = []
     private var mockError: Error?
     
-    func fetchRepositories(searchWord: String, completion: @escaping ((Result<[Repository], Error>) -> ())) {
+    func fetchRepositories(searchWord: String, completion: @escaping ((Result<[Repository], Error>) -> Void)) {
         guard
             let error = mockError
         else {
@@ -55,6 +55,7 @@ class GitHubAPIModelInputStub: GitHubAPIModelInput {
         switch response {
         case let .success(repositories):
             mockRepositories = repositories
+            
         case let .failure(error):
             mockError = error
         }
@@ -147,7 +148,7 @@ class RepositorySearchTests: XCTestCase {
                 
                 // After tapping cell
                 XCTAssertEqual(spy.tapTableRowCellCallCount, 0)
-                guard let _ = spy.selectedRepository
+                guard spy.selectedRepository != nil
                 else {
                     XCTAssertNil(spy.selectedRepository)
                     return
@@ -156,4 +157,3 @@ class RepositorySearchTests: XCTestCase {
         }
     }
 }
-

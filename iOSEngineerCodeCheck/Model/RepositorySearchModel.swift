@@ -10,11 +10,11 @@ import Foundation
 import Alamofire
 
 protocol GitHubAPIModelInput {
-    func fetchRepositories(searchWord: String, completion: @escaping ((Result<[Repository], Error>) -> ()))
+    func fetchRepositories(searchWord: String, completion: @escaping ((Result<[Repository], Error>) -> Void))
 }
 
 class GitHubAPIModel: GitHubAPIModelInput {
-    func fetchRepositories(searchWord: String, completion: @escaping ((Result<[Repository], Error>) -> ())) {
+    func fetchRepositories(searchWord: String, completion: @escaping ((Result<[Repository], Error>) -> Void)) {
         guard
             let urlString = "https://api.github.com/search/repositories?q=\(searchWord)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
             let apiEndpoint = URL(string: urlString)
@@ -28,6 +28,7 @@ class GitHubAPIModel: GitHubAPIModelInput {
                     case .success(let data):
                         let searchResult = try JSONDecoder().decode(RepositorySearchResult.self, from: data)
                         completion(.success(searchResult.items))
+                        
                     case .failure(let error):
                         throw error
                     }

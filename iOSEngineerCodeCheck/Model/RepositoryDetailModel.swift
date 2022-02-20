@@ -10,11 +10,11 @@ import Alamofire
 import AlamofireImage
 
 protocol RepositoryDetailModelInput {
-    func getImage(repository: Repository, completion: @escaping ((Result<Image, Error>) -> ()))
+    func getImage(repository: Repository, completion: @escaping ((Result<Image, Error>) -> Void))
 }
 
 class RepositoryDetailModel: RepositoryDetailModelInput {
-    func getImage(repository: Repository, completion: @escaping ((Result<Image, Error>) -> ())) {
+    func getImage(repository: Repository, completion: @escaping ((Result<Image, Error>) -> Void)) {
         guard
             let repoOwnerAvatar = repository.owner.avatarURL,
             let repoOwnerImageURL = URL(string: repoOwnerAvatar)
