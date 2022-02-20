@@ -37,8 +37,11 @@ class RepositorySearchPresenter: RepositorySearchPresenterInput {
     }
     
     private func getRepository(forRow row: Int) -> Repository? {
-        if row < repositories.count { return repositories[row] }
-        else { return nil }
+        if row < repositories.count {
+            return repositories[row]
+        } else {
+            return nil
+        }
     }
     
     func didSelectRowAt(row: Int) {

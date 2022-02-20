@@ -23,7 +23,7 @@ class GitHubAPIModel: GitHubAPIModelInput {
         AF.request(apiEndpoint, method: .get, parameters: nil, encoding: JSONEncoding.default)
             .validate(statusCode: [200])
             .responseData { (response) in
-                do{
+                do {
                     switch response.result {
                     case .success(let data):
                         let searchResult = try JSONDecoder().decode(RepositorySearchResult.self, from: data)
