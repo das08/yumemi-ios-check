@@ -81,8 +81,8 @@ class RepositorySearchTests: XCTestCase {
     }
     
     func testDidTapSearchButtonFetchSuccess() {
-        XCTContext.runActivity(named: "検索ボタンをクリックしたときActivityIndicatorが呼び出されているか") { _ in
-            XCTContext.runActivity(named: "検索結果がsuccessのとき") { _ in
+        XCTContext.runActivity(named: "検索ボタンをタップしたときActivityIndicatorが呼び出されているか") { _ in
+            XCTContext.runActivity(named: "APIRequestがsuccessのとき") { _ in
                 // Before tapping search button
                 XCTAssertEqual(spy.showUIActivityIndicatorViewCallCount, 0)
                 XCTAssertEqual(spy.hideUIActivityIndicatorViewCallCount, 0)
@@ -99,8 +99,8 @@ class RepositorySearchTests: XCTestCase {
     }
     
     func testDidTapSearchButtonFetchFailure() {
-        XCTContext.runActivity(named: "検索ボタンをクリックしたときActivityIndicatorが呼び出されているか") { _ in
-            XCTContext.runActivity(named: "検索結果がfailureのとき") { _ in
+        XCTContext.runActivity(named: "検索ボタンをタップしたときActivityIndicatorが呼び出されているか") { _ in
+            XCTContext.runActivity(named: "APIRequestがfailureのとき") { _ in
                 // Before tapping search button
                 XCTAssertEqual(spy.showUIActivityIndicatorViewCallCount, 0)
                 XCTAssertEqual(spy.hideUIActivityIndicatorViewCallCount, 0)
@@ -116,28 +116,29 @@ class RepositorySearchTests: XCTestCase {
     }
     
     func testDidTapCellRowFetchSuccess() {
-        XCTContext.runActivity(named: "検索ボタンをクリックしたときActivityIndicatorが呼び出されているか") { _ in
-            XCTContext.runActivity(named: "検索結果がsuccessのとき") { _ in
+        XCTContext.runActivity(named: "TableViewのcellをタップしたときにそのレポジトリが取得できているか") { _ in
+            XCTContext.runActivity(named: "APIRequestがsuccessのとき") { _ in
                 
                 // Before tapping cell
                 XCTAssertEqual(spy.tapTableRowCellCallCount, 0)
                 
-                let mockRepository = Repository(id: 1, url: "https://github.com", fullName: "iOSTest", owner: RepositoryOwner(id: 1, avatarURL: "https://via.placeholder.com/150"), language: "Swift", starCount: 10, watchersCount: 10, forksCount: 20, openIssuesCount: 30)
-                stub.mockResponse(response: .success([mockRepository]))
+                let mockRepository1 = Repository(id: 1, url: "https://github.com", fullName: "iOSTest", owner: RepositoryOwner(id: 1, avatarURL: "https://via.placeholder.com/150"), language: "Swift", starCount: 10, watchersCount: 10, forksCount: 20, openIssuesCount: 30)
+                let mockRepository2 = Repository(id: 2, url: "https://github.com", fullName: "AppleDev", owner: RepositoryOwner(id: 2, avatarURL: "https://via.placeholder.com/150"), language: "Java", starCount: 12, watchersCount: 12, forksCount: 22, openIssuesCount: 32)
+                stub.mockResponse(response: .success([mockRepository1, mockRepository2]))
                 presenter.searchBarSearchButtonClicked(searchWord: "Apple")
                 presenter.didSelectRowAt(row: 0)
                 
                 // After tapping cell
                 XCTAssertEqual(spy.tapTableRowCellCallCount, 1)
                 guard let selectedRepository = spy.selectedRepository else { return }
-                XCTAssertEqual(selectedRepository, mockRepository)
+                XCTAssertEqual(selectedRepository, mockRepository1)
             }
         }
     }
     
     func testDidTapCellRowFetchFailure() {
-        XCTContext.runActivity(named: "検索ボタンをクリックしたときActivityIndicatorが呼び出されているか") { _ in
-            XCTContext.runActivity(named: "検索結果がsuccessのとき") { _ in
+        XCTContext.runActivity(named: "TableViewのcellをタップしたときにそのレポジトリが取得できているか") { _ in
+            XCTContext.runActivity(named: "APIRequestがsuccessのとき") { _ in
                 
                 // Before tapping cell
                 XCTAssertEqual(spy.tapTableRowCellCallCount, 0)
