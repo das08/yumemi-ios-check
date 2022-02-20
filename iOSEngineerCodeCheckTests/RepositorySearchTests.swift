@@ -127,15 +127,32 @@ class RepositorySearchTests: XCTestCase {
                 presenter.searchBarSearchButtonClicked(searchWord: "Apple")
                 presenter.didSelectRowAt(row: 0)
                 
-                guard
-                    let selectedRepository = spy.selectedRepository
+                // After tapping cell
+                XCTAssertEqual(spy.tapTableRowCellCallCount, 1)
+                guard let selectedRepository = spy.selectedRepository else { return }
+                XCTAssertEqual(selectedRepository, mockRepository)
+            }
+        }
+    }
+    
+    func testDidTapCellRowFetchFailure() {
+        XCTContext.runActivity(named: "検索ボタンをクリックしたときActivityIndicatorが呼び出されているか") { _ in
+            XCTContext.runActivity(named: "検索結果がsuccessのとき") { _ in
+                
+                // Before tapping cell
+                XCTAssertEqual(spy.tapTableRowCellCallCount, 0)
+                
+                stub.mockResponse(response: .failure(APIError.network))
+                presenter.searchBarSearchButtonClicked(searchWord: "Apple")
+                presenter.didSelectRowAt(row: 0)
+                
+                // After tapping cell
+                XCTAssertEqual(spy.tapTableRowCellCallCount, 0)
+                guard let _ = spy.selectedRepository
                 else {
-                    XCTFail()
+                    XCTAssertNil(spy.selectedRepository)
                     return
                 }
-                // After tapping cell
-                XCTAssertEqual(selectedRepository, mockRepository)
-                XCTAssertEqual(spy.tapTableRowCellCallCount, 1)
             }
         }
     }
