@@ -15,12 +15,14 @@ protocol GitHubAPIModelInput {
 
 class GitHubAPIModel: GitHubAPIModelInput {
     func fetchRepositories(searchWord: String, completion: @escaping ((Result<[Repository], Error>) -> ())) {
-        guard let apiEndpoint = URL(string: "https://api.github.com/search/repositories?q=\(searchWord)")
+        guard
+            let urlString = "https://api.github.com/search/repositories?q=\(searchWord)".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+            let apiEndpoint = URL(string: urlString)
         else { return }
         
         AF.request(apiEndpoint, method: .get, parameters: nil, encoding: JSONEncoding.default)
             .validate(statusCode: [200])
-            .responseData { [weak self] (response) in
+            .responseData { (response) in
                 do{
                     switch response.result {
                     case .success(let data):

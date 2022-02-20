@@ -15,6 +15,7 @@ struct RepositorySearchResult: Codable {
 
 struct Repository: Codable {
     let id: Int
+    let url: String
     let fullName: String
     let owner: RepositoryOwner
     let language: String?
@@ -24,6 +25,7 @@ struct Repository: Codable {
     let openIssuesCount: Int
     enum CodingKeys: String, CodingKey {
         case id
+        case url = "html_url"
         case fullName = "full_name"
         case owner
         case language

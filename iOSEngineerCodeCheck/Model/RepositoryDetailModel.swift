@@ -20,15 +20,6 @@ class RepositoryDetailModel: RepositoryDetailModelInput {
             let repoOwnerImageURL = URL(string: repoOwnerAvatar)
         else { return }
         
-//        URLSession.shared.dataTask(with: repoOwnerImageURL) { [weak self] (data, res, err) in
-//            // TODO: Display placeholder image if the image does not exist
-//            guard let imageData = data
-//            else {
-//                completion(.failure(err as! Error))
-//                return
-//            }
-//            completion(.success(imageData))
-//        }.resume()
         AF.request(repoOwnerImageURL).responseImage { response in
             switch response.result {
             case .success(let image):
