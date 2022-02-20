@@ -28,7 +28,9 @@ class RepositorySearchPresenterOutputSpy: RepositorySearchPresenterOutput {
     }
     
     func didFetchRepository(of repository: Repository) {
-        
+        tapTableRowCellCallCount += 1
+        selectedRepository = repository
+        print("repo", repository)
     }
     
     func didBeginEditing() {
@@ -107,8 +109,33 @@ class RepositorySearchTests: XCTestCase {
                 presenter.searchBarSearchButtonClicked(searchWord: "Apple")
                 
                 // After tapping search button
-                XCTAssertEqual(spy.showUIActivityIndicatorViewCount, 1)
-                XCTAssertEqual(spy.hideUIActivityIndicatorViewCount, 1)
+                XCTAssertEqual(spy.showUIActivityIndicatorViewCallCount, 1)
+                XCTAssertEqual(spy.hideUIActivityIndicatorViewCallCount, 1)
+            }
+        }
+    }
+    
+    func testDidTapCellRowFetchSuccess() {
+        XCTContext.runActivity(named: "検索ボタンをクリックしたときActivityIndicatorが呼び出されているか") { _ in
+            XCTContext.runActivity(named: "検索結果がsuccessのとき") { _ in
+                
+                // Before tapping cell
+                XCTAssertEqual(spy.tapTableRowCellCallCount, 0)
+                
+                let mockRepository = Repository(id: 1, url: "https://github.com", fullName: "iOSTest", owner: RepositoryOwner(id: 1, avatarURL: "https://via.placeholder.com/150"), language: "Swift", starCount: 10, watchersCount: 10, forksCount: 20, openIssuesCount: 30)
+                stub.mockResponse(response: .success([mockRepository]))
+                presenter.searchBarSearchButtonClicked(searchWord: "Apple")
+                presenter.didSelectRowAt(row: 0)
+                
+                guard
+                    let selectedRepository = spy.selectedRepository
+                else {
+                    XCTFail()
+                    return
+                }
+                // After tapping cell
+                XCTAssertEqual(selectedRepository, mockRepository)
+                XCTAssertEqual(spy.tapTableRowCellCallCount, 1)
             }
         }
     }
