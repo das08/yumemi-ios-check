@@ -2,7 +2,7 @@
 //  iOSEngineerCodeCheckUITests.swift
 //  iOSEngineerCodeCheckUITests
 //
-//  Created by 史 翔新 on 2020/04/20.
+//  Created by Kazuki Takeda on 2022/02/20.
 //  Copyright © 2020 YUMEMI Inc. All rights reserved.
 //
 
@@ -23,21 +23,22 @@ class iOSEngineerCodeCheckUITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
     
-    func testExample() throws {
+    func testSearchRepository() throws {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
         app.launch()
+        app.tables.searchFields["GitHubのリポジトリを検索できるよー"].tap()
+        app.searchFields["GitHubのリポジトリを検索できるよー"].typeText("Swift")
+        app.buttons["Search"].tap()
         
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
-        }
+        // Wait until its loaded
+        sleep(4)
+
+        let cell = app.tables.cells.element(boundBy: 0)
+        XCTAssert(cell.exists)
+        cell.tap()
+        
+        let shareButton = app.navigationBars.element(boundBy: 0).buttons["Share"]
+        XCTAssert(shareButton.exists)
     }
 }
