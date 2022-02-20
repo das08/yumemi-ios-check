@@ -24,7 +24,7 @@ class RepositoryDetailPresenter: RepositoryDetailPresenterInput {
     private weak var repositoryDetailView: RepositoryDetailPresenterOutput?
     private var repositoryDetailModel: RepositoryDetailModelInput
 
-    init(with view: RepositoryDetailPresenterOutput, with model: RepositoryDetailModel) {
+    init(with view: RepositoryDetailPresenterOutput, with model: RepositoryDetailModelInput) {
         self.repositoryDetailView = view
         self.repositoryDetailModel = model
     }
