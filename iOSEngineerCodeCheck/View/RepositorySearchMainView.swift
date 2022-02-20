@@ -90,6 +90,8 @@ extension RepositorySearchMainView: RepositorySearchPresenterOutput {
 
     func didFailToFetchRepository(with error: Error) {
         print("error: didFailToFetchRepository")
+        let alert = UIAlertController.createOKAlert(title: "取得エラー", message: error.localizedDescription, vc: self)
+        present(alert, animated: true, completion: nil)
         self.activityIndicatorView.stopAnimating()
     }
 
