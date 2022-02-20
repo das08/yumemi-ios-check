@@ -10,19 +10,21 @@ import XCTest
 @testable import iOSEngineerCodeCheck
 
 class RepositorySearchPresenterOutputSpy: RepositorySearchPresenterOutput {
-    private(set) var showUIActivityIndicatorViewCount = 0
-    private(set) var hideUIActivityIndicatorViewCount = 0
+    private(set) var showUIActivityIndicatorViewCallCount = 0
+    private(set) var hideUIActivityIndicatorViewCallCount = 0
+    private(set) var tapTableRowCellCallCount = 0
+    private(set) var selectedRepository: Repository?
     
     func didStartToFetch() {
-        showUIActivityIndicatorViewCount += 1
+        showUIActivityIndicatorViewCallCount += 1
     }
     
     func didFetch(_ repositories: [Repository]) {
-        hideUIActivityIndicatorViewCount += 1
+        hideUIActivityIndicatorViewCallCount += 1
     }
     
     func didFailToFetchRepository(with error: Error) {
-        hideUIActivityIndicatorViewCount += 1
+        hideUIActivityIndicatorViewCallCount += 1
     }
     
     func didFetchRepository(of repository: Repository) {
@@ -80,16 +82,16 @@ class RepositorySearchTests: XCTestCase {
         XCTContext.runActivity(named: "検索ボタンをクリックしたときActivityIndicatorが呼び出されているか") { _ in
             XCTContext.runActivity(named: "検索結果がsuccessのとき") { _ in
                 // Before tapping search button
-                XCTAssertEqual(spy.showUIActivityIndicatorViewCount, 0)
-                XCTAssertEqual(spy.hideUIActivityIndicatorViewCount, 0)
+                XCTAssertEqual(spy.showUIActivityIndicatorViewCallCount, 0)
+                XCTAssertEqual(spy.hideUIActivityIndicatorViewCallCount, 0)
                 
                 let mockRepository = Repository(id: 1, url: "https://github.com", fullName: "iOSTest", owner: RepositoryOwner(id: 1, avatarURL: "https://via.placeholder.com/150"), language: "Swift", starCount: 10, watchersCount: 10, forksCount: 20, openIssuesCount: 30)
                 stub.mockResponse(response: .success([mockRepository]))
                 presenter.searchBarSearchButtonClicked(searchWord: "Apple")
                 
                 // After tapping search button
-                XCTAssertEqual(spy.showUIActivityIndicatorViewCount, 1)
-                XCTAssertEqual(spy.hideUIActivityIndicatorViewCount, 1)
+                XCTAssertEqual(spy.showUIActivityIndicatorViewCallCount, 1)
+                XCTAssertEqual(spy.hideUIActivityIndicatorViewCallCount, 1)
             }
         }
     }
@@ -97,10 +99,9 @@ class RepositorySearchTests: XCTestCase {
     func testDidTapSearchButtonFetchFailure() {
         XCTContext.runActivity(named: "検索ボタンをクリックしたときActivityIndicatorが呼び出されているか") { _ in
             XCTContext.runActivity(named: "検索結果がfailureのとき") { _ in
-                
                 // Before tapping search button
-                XCTAssertEqual(spy.showUIActivityIndicatorViewCount, 0)
-                XCTAssertEqual(spy.hideUIActivityIndicatorViewCount, 0)
+                XCTAssertEqual(spy.showUIActivityIndicatorViewCallCount, 0)
+                XCTAssertEqual(spy.hideUIActivityIndicatorViewCallCount, 0)
                 
                 stub.mockResponse(response: .failure(APIError.network))
                 presenter.searchBarSearchButtonClicked(searchWord: "Apple")
