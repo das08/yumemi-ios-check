@@ -20,7 +20,7 @@ class GitHubAPIModel: GitHubAPIModelInput {
             let apiEndpoint = URL(string: urlString)
         else { return }
         
-        AF.request(apiEndpoint, method: .get, parameters: nil, encoding: JSONEncoding.default)
+        AF.request(apiEndpoint, method: .get, parameters: nil, encoding: JSONEncoding.default, requestModifier: { $0.timeoutInterval = 5.0 })
             .validate(statusCode: [200])
             .responseData { (response) in
                 do {
@@ -33,13 +33,26 @@ class GitHubAPIModel: GitHubAPIModelInput {
                         throw error
                     }
                 } catch {
-                    if error as? APIError == APIError.network {
-                        print("network Error")
-                    } else {
-                        print(error)
-                    }
-                    completion(.failure(error))
+                    completion(.failure(self.localizedError(error: error)))
                 }
             }
+    }
+    
+    private func localizedError(error: Error) -> Error {
+        let localizedError: Error
+        switch error {
+        case AFError.responseValidationFailed:
+            localizedError = APIError.tooManyCall
+            
+        case APIError.network:
+            localizedError = APIError.network
+            
+        case AFError.sessionTaskFailed(URLError.timedOut):
+            localizedError = APIError.network
+            
+        default:
+            localizedError = APIError.unexpected(error.localizedDescription)
+        }
+        return localizedError
     }
 }
