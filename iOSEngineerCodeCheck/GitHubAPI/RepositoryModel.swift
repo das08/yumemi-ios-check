@@ -13,7 +13,7 @@ struct RepositorySearchResult: Codable {
     }
 }
 
-struct Repository: Codable {
+struct Repository: Codable, Equatable {
     let id: Int
     let url: String
     let fullName: String
@@ -38,6 +38,11 @@ struct Repository: Codable {
     func getLanguage() -> String {
         guard let lang = self.language else { return "---" }
         return lang
+    }
+    
+    // Simple equal check
+    static func == (lhs: Repository, rhs: Repository) -> Bool {
+        return lhs.id == rhs.id
     }
 }
 

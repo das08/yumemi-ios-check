@@ -43,7 +43,7 @@ class RepositorySearchMainView: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter.didSelectRowAt(indexPath)
+        presenter.didSelectRowAt(row: indexPath.row)
     }
 }
 
@@ -59,7 +59,7 @@ extension RepositorySearchMainView {
         searchBar.delegate = self
         navigationBar.title = "Discover!"
         navigationBar.backBarButtonItem?.title = nil
-        presenter = RepositorySearchPresenter.init(with: self)
+        presenter = RepositorySearchPresenter.init(with: self, with: GitHubAPIModel())
     }
     
     private func createCellText(cell: UITableViewCell, indexPath: IndexPath) -> UITableViewCell{

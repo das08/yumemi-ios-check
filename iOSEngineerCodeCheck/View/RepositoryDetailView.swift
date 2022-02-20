@@ -35,7 +35,7 @@ class RepositoryDetailView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter = RepositoryDetailPresenter.init(with: self)
+        presenter = RepositoryDetailPresenter.init(with: self, with: RepositoryDetailModel())
         prepareLabels()
     }
 }
