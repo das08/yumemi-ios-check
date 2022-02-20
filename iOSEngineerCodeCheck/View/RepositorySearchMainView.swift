@@ -89,6 +89,7 @@ extension RepositorySearchMainView: RepositorySearchPresenterOutput {
 
     func didFailToFetchRepository(with error: Error) {
         print("error: didFailToFetchRepository")
+        self.activityIndicatorView.stopAnimating()
     }
 
     func didFetchRepository(of repository: Repository) {
