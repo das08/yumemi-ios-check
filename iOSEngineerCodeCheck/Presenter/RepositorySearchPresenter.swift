@@ -9,7 +9,7 @@ import Foundation
 
 protocol RepositorySearchPresenterInput {
     var repositories: [Repository] { get }
-    func didSelectRowAt(_ indexPath: IndexPath)
+    func didSelectRowAt(row: Int)
     func searchBarSearchButtonClicked(searchWord: String)
     func searchBarTextDidChange()
     func passRepository(to receiver: RepositoryReceiver)
@@ -41,9 +41,9 @@ class RepositorySearchPresenter: RepositorySearchPresenterInput {
         else { return nil }
     }
     
-    func didSelectRowAt(_ indexPath: IndexPath) {
-        guard let repository = getRepository(forRow: indexPath.row) else { return }
-        selectedIndex = indexPath.row
+    func didSelectRowAt(row: Int) {
+        guard let repository = getRepository(forRow: row) else { return }
+        selectedIndex = row
         repositorySearchView?.didFetchRepository(of: repository)
     }
     

@@ -43,7 +43,7 @@ class RepositorySearchMainView: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter.didSelectRowAt(indexPath)
+        presenter.didSelectRowAt(row: indexPath.row)
     }
 }
 
