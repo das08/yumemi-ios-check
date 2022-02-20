@@ -41,7 +41,7 @@ class GitHubAPIModelInputStub: GitHubAPIModelInput {
     private var mockRepositories: [Repository] = []
     private var mockError: Error?
     
-    func fetchRepositories(searchWord: String, completion: @escaping ((Result<[Repository], Error>) -> ())) {
+    func fetchRepositories(searchWord: String, completion: @escaping ((Result<[Repository], Error>) -> Void)) {
         guard
             let error = mockError
         else {
@@ -55,6 +55,7 @@ class GitHubAPIModelInputStub: GitHubAPIModelInput {
         switch response {
         case let .success(repositories):
             mockRepositories = repositories
+            
         case let .failure(error):
             mockError = error
         }
@@ -62,8 +63,11 @@ class GitHubAPIModelInputStub: GitHubAPIModelInput {
 }
 
 class RepositorySearchTests: XCTestCase {
+    // swiftlint:disable:next implicitly_unwrapped_optional
     private var spy: RepositorySearchPresenterOutputSpy!
+    // swiftlint:disable:next implicitly_unwrapped_optional
     private var stub: GitHubAPIModelInputStub!
+    // swiftlint:disable:next implicitly_unwrapped_optional
     private var presenter: RepositorySearchPresenter!
     private var mockRepository1 = Repository(id: 1, url: "https://github.com", fullName: "iOSTest", owner: RepositoryOwner(id: 1, avatarURL: "https://via.placeholder.com/150"), language: "Swift", starCount: 10, watchersCount: 10, forksCount: 20, openIssuesCount: 30)
     private var mockRepository2 = Repository(id: 2, url: "https://github.com", fullName: "AppleDev", owner: RepositoryOwner(id: 2, avatarURL: "https://via.placeholder.com/150"), language: "Java", starCount: 12, watchersCount: 12, forksCount: 22, openIssuesCount: 32)
@@ -147,7 +151,7 @@ class RepositorySearchTests: XCTestCase {
                 
                 // After tapping cell
                 XCTAssertEqual(spy.tapTableRowCellCallCount, 0)
-                guard let _ = spy.selectedRepository
+                guard spy.selectedRepository != nil
                 else {
                     XCTAssertNil(spy.selectedRepository)
                     return
@@ -156,4 +160,3 @@ class RepositorySearchTests: XCTestCase {
         }
     }
 }
-

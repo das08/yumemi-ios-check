@@ -11,7 +11,6 @@ target 'iOSEngineerCodeCheck' do
   # Pods for iOSEngineerCodeCheck
 
   target 'iOSEngineerCodeCheckTests' do
-    inherit! :search_paths
     # Pods for testing
   end
 

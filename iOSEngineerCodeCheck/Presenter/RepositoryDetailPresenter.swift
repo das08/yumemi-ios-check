@@ -39,6 +39,7 @@ extension RepositoryDetailPresenter: RepositoryReceiver {
             case .success(let image):
                 self?.image = image
                 self?.repositoryDetailView?.didFetch(image)
+                
             case .failure(let error):
                 self?.repositoryDetailView?.didFailToFetchImage(with: error)
             }

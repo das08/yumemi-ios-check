@@ -23,10 +23,11 @@ class RepositoryDetailPresenterOutputSpy: RepositoryDetailPresenterOutput {
 }
 
 class RepositoryDetailModelInputStub: RepositoryDetailModelInput {
+    // swiftlint:disable:next implicitly_unwrapped_optional
     private var mockImage: Image!
     private var mockError: Error?
     
-    func getImage(repository: Repository, completion: @escaping ((Result<Image, Error>) -> ())) {
+    func getImage(repository: Repository, completion: @escaping ((Result<Image, Error>) -> Void)) {
         guard
             let error = mockError
         else {
@@ -40,6 +41,7 @@ class RepositoryDetailModelInputStub: RepositoryDetailModelInput {
         switch response {
         case let .success(image):
             mockImage = image
+        
         case let .failure(error):
             mockError = error
         }
@@ -47,8 +49,11 @@ class RepositoryDetailModelInputStub: RepositoryDetailModelInput {
 }
 
 class RepositoryDetailTests: XCTestCase {
+    // swiftlint:disable:next implicitly_unwrapped_optional
     private var spy: RepositoryDetailPresenterOutputSpy!
+    // swiftlint:disable:next implicitly_unwrapped_optional
     private var stub: RepositoryDetailModelInputStub!
+    // swiftlint:disable:next implicitly_unwrapped_optional
     private var presenter: RepositoryDetailPresenter!
     private var mockRepository = Repository(id: 1, url: "https://github.com", fullName: "iOSTest", owner: RepositoryOwner(id: 1, avatarURL: "https://via.placeholder.com/150"), language: "Swift", starCount: 10, watchersCount: 10, forksCount: 20, openIssuesCount: 30)
     

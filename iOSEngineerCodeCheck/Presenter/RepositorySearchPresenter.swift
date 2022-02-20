@@ -37,8 +37,11 @@ class RepositorySearchPresenter: RepositorySearchPresenterInput {
     }
     
     private func getRepository(forRow row: Int) -> Repository? {
-        if row < repositories.count { return repositories[row] }
-        else { return nil }
+        if row < repositories.count {
+            return repositories[row]
+        } else {
+            return nil
+        }
     }
     
     func didSelectRowAt(row: Int) {
@@ -54,6 +57,7 @@ class RepositorySearchPresenter: RepositorySearchPresenterInput {
             case .success(let repositories):
                 self?.repositories = repositories
                 self?.repositorySearchView?.didFetch(repositories)
+                
             case .failure(let error):
                 self?.repositorySearchView?.didFailToFetchRepository(with: error)
             }

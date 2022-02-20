@@ -1,5 +1,5 @@
 //
-//  Receiver.swift
+//  RepositoryReceiver.swift
 //  iOSEngineerCodeCheck
 //
 //  Created by Kazuki Takeda on 2022/02/18.

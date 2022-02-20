@@ -14,9 +14,7 @@ opt_in_rules:
   - empty_count
   - empty_string
   - fatal_error_message
-  - file_name
   - file_name_no_space
-  - file_types_order
   - implicitly_unwrapped_optional
   - indentation_width
   - multiline_arguments_brackets
@@ -33,10 +31,12 @@ opt_in_rules:
   - vertical_parameter_alignment_on_call
   - vertical_whitespace_between_cases
 
+disabled_rules:
+  - line_length
 
 identifier_name:
     min_length: 1
-    max_length: 30
+    max_length: 50
 
 trailing_comma:
   mandatory_comma: true
