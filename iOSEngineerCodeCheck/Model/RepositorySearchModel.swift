@@ -51,6 +51,9 @@ class GitHubAPIModel: GitHubAPIModelInput {
         case AFError.sessionTaskFailed(URLError.timedOut):
             localizedError = APIError.network
             
+        case AFError.sessionTaskFailed(URLError.notConnectedToInternet):
+            localizedError = APIError.network
+            
         default:
             localizedError = APIError.unexpected(error.localizedDescription)
         }

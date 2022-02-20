@@ -14,6 +14,7 @@ public enum APIError: Error, Equatable {
     case network
     case tooManyCall
     case noMatchResult
+    case noInternet
     case unexpected(String)
 }
 
@@ -34,6 +35,9 @@ extension APIError: LocalizedError {
             
         case .noMatchResult:
             return "お探しのレポジトリは見つかりませんでした。\n検索ワードを変えて再度お試しください。"
+            
+        case .noInternet:
+            return "インターネットに接続していません。WiFiまたは携帯回線をONにして再度お試しください。"
             
         case .unexpected(let errorMsg):
             return errorMsg
