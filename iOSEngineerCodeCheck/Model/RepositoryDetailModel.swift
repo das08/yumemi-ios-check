@@ -5,7 +5,6 @@
 //  Created by Kazuki Takeda on 2022/02/18.
 //  Copyright © 2022 YUMEMI Inc. All rights reserved.
 //
-import Foundation
 import Alamofire
 import AlamofireImage
 

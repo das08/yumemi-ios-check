@@ -57,7 +57,6 @@ extension RepositorySearchMainView {
     }
     
     private func prepareBars() {
-        searchBar.placeholder = "GitHubのリポジトリを検索できるよー"
         searchBar.delegate = self
         navigationBar.title = "Discover!"
         navigationBar.backBarButtonItem?.title = nil

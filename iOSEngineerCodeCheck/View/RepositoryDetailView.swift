@@ -26,6 +26,7 @@ class RepositoryDetailView: UIViewController {
     @IBAction func openRepositoryButton(_ sender: UIButton) {
         openRepository()
     }
+    
     @IBAction func shareRepositoryButton(_ sender: UIButton) {
         shareRepository()
     }
@@ -71,14 +72,12 @@ extension RepositoryDetailView {
     }
     
     private func openRepository() {
-        guard let repoURL = repositoryURL, let url = URL(string: repoURL)
-        else { return }
+        guard let repoURL = repositoryURL, let url = URL(string: repoURL) else { return }
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
     private func shareRepository() {
-        guard let repoURL = repositoryURL, let url = URL(string: repoURL)
-        else { return }
+        guard let repoURL = repositoryURL, let url = URL(string: repoURL) else { return }
         let activityViewController = UIActivityViewController(activityItems: [url], applicationActivities: nil)
         present(activityViewController, animated: true, completion: nil)
     }
