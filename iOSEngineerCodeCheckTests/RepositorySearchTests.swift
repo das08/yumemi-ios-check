@@ -59,22 +59,26 @@ class GitHubAPIModelInputStub: GitHubAPIModelInput {
 }
 
 class RepositorySearchTests: XCTestCase {
+    var spy: RepositorySearchPresenterOutputSpy!
+    var stub: GitHubAPIModelInputStub!
+    var presenter: RepositorySearchPresenter!
     
-    override func setUpWithError() throws {
+    override func setUp() {
+        super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        spy = RepositorySearchPresenterOutputSpy()
+        stub = GitHubAPIModelInputStub()
+        presenter = RepositorySearchPresenter(with: spy, with: stub)
     }
     
-    override func tearDownWithError() throws {
+    override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+        super.tearDown()
     }
     
-    func testDidTapSearchButton() {
+    func testDidTapSearchButtonFetchSuccess() {
         XCTContext.runActivity(named: "検索ボタンをクリックしたときActivityIndicatorが呼び出されているか") { _ in
             XCTContext.runActivity(named: "検索結果がsuccessのとき") { _ in
-                let spy = RepositorySearchPresenterOutputSpy()
-                let stub = GitHubAPIModelInputStub()
-                let presenter = RepositorySearchPresenter(with: spy, with: stub)
-                
                 // Before tapping search button
                 XCTAssertEqual(spy.showUIActivityIndicatorViewCount, 0)
                 XCTAssertEqual(spy.hideUIActivityIndicatorViewCount, 0)
@@ -87,11 +91,12 @@ class RepositorySearchTests: XCTestCase {
                 XCTAssertEqual(spy.showUIActivityIndicatorViewCount, 1)
                 XCTAssertEqual(spy.hideUIActivityIndicatorViewCount, 1)
             }
-            
+        }
+    }
+    
+    func testDidTapSearchButtonFetchFailure() {
+        XCTContext.runActivity(named: "検索ボタンをクリックしたときActivityIndicatorが呼び出されているか") { _ in
             XCTContext.runActivity(named: "検索結果がfailureのとき") { _ in
-                let spy = RepositorySearchPresenterOutputSpy()
-                let stub = GitHubAPIModelInputStub()
-                let presenter = RepositorySearchPresenter(with: spy, with: stub)
                 
                 // Before tapping search button
                 XCTAssertEqual(spy.showUIActivityIndicatorViewCount, 0)
@@ -106,6 +111,5 @@ class RepositorySearchTests: XCTestCase {
             }
         }
     }
-    
 }
 
