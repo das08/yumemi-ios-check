@@ -59,7 +59,7 @@ extension RepositorySearchMainView {
         searchBar.delegate = self
         navigationBar.title = "Discover!"
         navigationBar.backBarButtonItem?.title = nil
-        presenter = RepositorySearchPresenter.init(with: self)
+        presenter = RepositorySearchPresenter.init(with: self, with: GitHubAPIModel())
     }
     
     private func createCellText(cell: UITableViewCell, indexPath: IndexPath) -> UITableViewCell{

@@ -31,9 +31,9 @@ class RepositorySearchPresenter: RepositorySearchPresenterInput {
     private weak var repositorySearchView: RepositorySearchPresenterOutput?
     private var repositorySearchModel: GitHubAPIModelInput
     
-    init(with view: RepositorySearchPresenterOutput) {
+    init(with view: RepositorySearchPresenterOutput, with model: GitHubAPIModelInput) {
         self.repositorySearchView = view
-        self.repositorySearchModel = GitHubAPIModel()
+        self.repositorySearchModel = model
     }
     
     private func getRepository(forRow row: Int) -> Repository? {
