@@ -199,6 +199,7 @@
 			children = (
 				97EC46E327BE70B5006409D7 /* RepositorySearchPresenter.swift */,
 				97EC46E927BF4223006409D7 /* RepositoryDetailPresenter.swift */,
+				97EC46EB27BF4B6B006409D7 /* Receiver.swift */,
 			);
 			path = Presenter;
 			sourceTree = "<group>";
@@ -240,7 +241,6 @@
 				BFD945E7244DC5EB0012785A /* Assets.xcassets */,
 				BFD945E9244DC5EB0012785A /* LaunchScreen.storyboard */,
 				BFD945EC244DC5EB0012785A /* Info.plist */,
-				97EC46EB27BF4B6B006409D7 /* Receiver.swift */,
 			);
 			path = iOSEngineerCodeCheck;
 			sourceTree = "<group>";
