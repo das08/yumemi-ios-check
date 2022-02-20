@@ -27,6 +27,7 @@ class GitHubAPIModel: GitHubAPIModelInput {
                     switch response.result {
                     case .success(let data):
                         let searchResult = try JSONDecoder().decode(RepositorySearchResult.self, from: data)
+                        if searchResult.items.isEmpty { completion(.failure(APIError.noMatchResult)) }
                         completion(.success(searchResult.items))
                         
                     case .failure(let error):
