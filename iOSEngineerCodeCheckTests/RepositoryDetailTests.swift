@@ -47,10 +47,10 @@ class RepositoryDetailModelInputStub: RepositoryDetailModelInput {
 }
 
 class RepositoryDetailTests: XCTestCase {
-    var spy: RepositoryDetailPresenterOutputSpy!
-    var stub: RepositoryDetailModelInputStub!
-    var presenter: RepositoryDetailPresenter!
-    var mockRepository = Repository(id: 1, url: "https://github.com", fullName: "iOSTest", owner: RepositoryOwner(id: 1, avatarURL: "https://via.placeholder.com/150"), language: "Swift", starCount: 10, watchersCount: 10, forksCount: 20, openIssuesCount: 30)
+    private var spy: RepositoryDetailPresenterOutputSpy!
+    private var stub: RepositoryDetailModelInputStub!
+    private var presenter: RepositoryDetailPresenter!
+    private var mockRepository = Repository(id: 1, url: "https://github.com", fullName: "iOSTest", owner: RepositoryOwner(id: 1, avatarURL: "https://via.placeholder.com/150"), language: "Swift", starCount: 10, watchersCount: 10, forksCount: 20, openIssuesCount: 30)
     
     override func setUp() {
         super.setUp()

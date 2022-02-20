@@ -30,7 +30,6 @@ class RepositorySearchPresenterOutputSpy: RepositorySearchPresenterOutput {
     func didFetchRepository(of repository: Repository) {
         tapTableRowCellCallCount += 1
         selectedRepository = repository
-        print("repo", repository)
     }
     
     func didBeginEditing() {
@@ -63,9 +62,11 @@ class GitHubAPIModelInputStub: GitHubAPIModelInput {
 }
 
 class RepositorySearchTests: XCTestCase {
-    var spy: RepositorySearchPresenterOutputSpy!
-    var stub: GitHubAPIModelInputStub!
-    var presenter: RepositorySearchPresenter!
+    private var spy: RepositorySearchPresenterOutputSpy!
+    private var stub: GitHubAPIModelInputStub!
+    private var presenter: RepositorySearchPresenter!
+    private var mockRepository1 = Repository(id: 1, url: "https://github.com", fullName: "iOSTest", owner: RepositoryOwner(id: 1, avatarURL: "https://via.placeholder.com/150"), language: "Swift", starCount: 10, watchersCount: 10, forksCount: 20, openIssuesCount: 30)
+    private var mockRepository2 = Repository(id: 2, url: "https://github.com", fullName: "AppleDev", owner: RepositoryOwner(id: 2, avatarURL: "https://via.placeholder.com/150"), language: "Java", starCount: 12, watchersCount: 12, forksCount: 22, openIssuesCount: 32)
     
     override func setUp() {
         super.setUp()
@@ -87,8 +88,7 @@ class RepositorySearchTests: XCTestCase {
                 XCTAssertEqual(spy.showUIActivityIndicatorViewCallCount, 0)
                 XCTAssertEqual(spy.hideUIActivityIndicatorViewCallCount, 0)
                 
-                let mockRepository = Repository(id: 1, url: "https://github.com", fullName: "iOSTest", owner: RepositoryOwner(id: 1, avatarURL: "https://via.placeholder.com/150"), language: "Swift", starCount: 10, watchersCount: 10, forksCount: 20, openIssuesCount: 30)
-                stub.mockResponse(response: .success([mockRepository]))
+                stub.mockResponse(response: .success([mockRepository1]))
                 presenter.searchBarSearchButtonClicked(searchWord: "Apple")
                 
                 // After tapping search button
@@ -122,8 +122,6 @@ class RepositorySearchTests: XCTestCase {
                 // Before tapping cell
                 XCTAssertEqual(spy.tapTableRowCellCallCount, 0)
                 
-                let mockRepository1 = Repository(id: 1, url: "https://github.com", fullName: "iOSTest", owner: RepositoryOwner(id: 1, avatarURL: "https://via.placeholder.com/150"), language: "Swift", starCount: 10, watchersCount: 10, forksCount: 20, openIssuesCount: 30)
-                let mockRepository2 = Repository(id: 2, url: "https://github.com", fullName: "AppleDev", owner: RepositoryOwner(id: 2, avatarURL: "https://via.placeholder.com/150"), language: "Java", starCount: 12, watchersCount: 12, forksCount: 22, openIssuesCount: 32)
                 stub.mockResponse(response: .success([mockRepository1, mockRepository2]))
                 presenter.searchBarSearchButtonClicked(searchWord: "Apple")
                 presenter.didSelectRowAt(row: 0)
