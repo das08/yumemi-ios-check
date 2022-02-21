@@ -49,6 +49,20 @@ Issues を確認した上、本プロジェクトを [**Duplicate** してくだ
 
 </details>
 
+## 開発環境
+- M1 macOS Big Sur 11.4
+- Xcode 13.2.1
+- Swift 5.5.2
+- CocoaPods 1.10.1
+
+## 実行方法
+1. 本レポジトリをクローンする
+2. 依存関係をCocoaPodsでインストールする
+```bash
+pod install
+```
+3. `iOSEngineerCodeCheck.xcworkspace`を開く
+
 ## 使用したライブラリ
 - [Alamofire](https://github.com/Alamofire/Alamofire)
   - GitHub APIにrequestを送るために採用
@@ -77,8 +91,8 @@ FatVCを回避するために採用した。MVPを採用した理由としては
 - 検索画面のUI/UX改善
   - APIコール中に**ローディング表示**しUXを良くした
   - 検索を始める際に，前の検索結果を削除しUXを良くした
-  - 0件ヒットの場合はその旨を**アラート表示**するようにした
-  - 取得エラーの場合も**アラートを表示**するようにした
+  - 取得エラーの場合に**アラートを表示**するようにした
+  - 検索結果のtableViewのcellにユーザーが一番みたいであろう**star数を表示**した
   - GitHubAPIが日本語でも検索できる仕様なので，英数字以外も認めるようにした
 - レポジトリ詳細画面のUI/UXの改善
   - リポジトリアイコンを**丸く**しモダンなデザインにした
@@ -89,6 +103,8 @@ FatVCを回避するために採用した。MVPを採用した理由としては
   - レポジトリを**Shareできる**ように共有ボタンを追加した
   - レポジトリ名に応じてフォントサイズを可変にし，**見切れないように**した
 
+## 既知のバグ
+- GitHub APIのバグでstar数とwatcher数がおなじになっている
 
 ## 動作イメージ
 <img src="/README_Images/appdemo.gif" width="250"/>
