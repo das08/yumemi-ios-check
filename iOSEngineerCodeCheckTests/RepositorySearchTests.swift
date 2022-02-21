@@ -12,6 +12,7 @@ import XCTest
 class RepositorySearchPresenterOutputSpy: RepositorySearchPresenterOutput {
     private(set) var showUIActivityIndicatorViewCallCount = 0
     private(set) var hideUIActivityIndicatorViewCallCount = 0
+    private(set) var showUIAlertControllerCallCount = 0
     private(set) var tapTableRowCellCallCount = 0
     private(set) var selectedRepository: Repository?
     
@@ -25,6 +26,7 @@ class RepositorySearchPresenterOutputSpy: RepositorySearchPresenterOutput {
     
     func didFailToFetchRepository(with error: Error) {
         hideUIActivityIndicatorViewCallCount += 1
+        showUIAlertControllerCallCount += 1
     }
     
     func didFetchRepository(of repository: Repository) {
@@ -91,6 +93,7 @@ class RepositorySearchTests: XCTestCase {
                 // Before tapping search button
                 XCTAssertEqual(spy.showUIActivityIndicatorViewCallCount, 0)
                 XCTAssertEqual(spy.hideUIActivityIndicatorViewCallCount, 0)
+                XCTAssertEqual(spy.showUIAlertControllerCallCount, 0)
                 
                 stub.mockResponse(response: .success([mockRepository1]))
                 presenter.searchBarSearchButtonClicked(searchWord: "Apple")
@@ -98,6 +101,7 @@ class RepositorySearchTests: XCTestCase {
                 // After tapping search button
                 XCTAssertEqual(spy.showUIActivityIndicatorViewCallCount, 1)
                 XCTAssertEqual(spy.hideUIActivityIndicatorViewCallCount, 1)
+                XCTAssertEqual(spy.showUIAlertControllerCallCount, 0)
             }
         }
     }
@@ -108,6 +112,7 @@ class RepositorySearchTests: XCTestCase {
                 // Before tapping search button
                 XCTAssertEqual(spy.showUIActivityIndicatorViewCallCount, 0)
                 XCTAssertEqual(spy.hideUIActivityIndicatorViewCallCount, 0)
+                XCTAssertEqual(spy.showUIAlertControllerCallCount, 0)
                 
                 stub.mockResponse(response: .failure(APIError.network))
                 presenter.searchBarSearchButtonClicked(searchWord: "Apple")
@@ -115,6 +120,7 @@ class RepositorySearchTests: XCTestCase {
                 // After tapping search button
                 XCTAssertEqual(spy.showUIActivityIndicatorViewCallCount, 1)
                 XCTAssertEqual(spy.hideUIActivityIndicatorViewCallCount, 1)
+                XCTAssertEqual(spy.showUIAlertControllerCallCount, 1)
             }
         }
     }
